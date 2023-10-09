@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Raleway:ital,wght@0,300;0,500;1,700&display=swap');
+
+body {
+    margin: 0;
+    background: #FF4655;
+    font-family: "Oswald", "ital";
+}
+
+main {
+    max-width: 600px;
+    margin: auto;
+}
