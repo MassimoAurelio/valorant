@@ -1,15 +1,29 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import DropdownMenuItem from './DropDownMenuItem.vue'
+</script>
 
 <template>
   <div class="header-container">
     <div class="riotbar-left-content"></div>
-    <div class="riotbar-center-content">
-      <div class="logo"></div>
+    <nav class="riotbar-center-content">
       <div class="riotbar-desktop-navigation-wrapper">
-        <div class="desktop-link-item">
-          <p>ОБ ИГРЕ</p>
-          <div class="desktop-link-item-underline" style=""></div>
-        </div>
+        <DropdownMenuItem>
+          <div class="desktop-link-item" role="button" aria-haspopup="true" aria-expanded="false">
+            <p>ОБ ИГРЕ</p>
+          </div>
+          <template #menu>
+            <router-link to="/agents" class="agents">
+              <div class="router-link-content">АГЕНТЫ</div>
+            </router-link>
+
+            <router-link to="/maps" class="maps">
+              <div class="router-link-content">КАРТЫ</div></router-link
+            >
+            <router-link to="/arsenal" class="arsenal">
+              <div class="router-link-content">АРСЕНАЛ</div></router-link
+            >
+          </template>
+        </DropdownMenuItem>
         <div class="desktop-link-item">
           <p>МЕДИА</p>
           <div class="desktop-link-item-underline" style=""></div>
@@ -31,7 +45,7 @@
           <div class="desktop-link-item-underline" style=""></div>
         </div>
       </div>
-    </div>
+    </nav>
     <div class="riotbar-right-content">
       <div class="riotbar-search-container">
         <img src="../assets/img/search.svg" alt="" />
@@ -156,7 +170,7 @@ p:hover {
 }
 
 .desktop-link-item-underline {
-  height: 7px;
+  height: 4px;
   width: 100%;
   border-radius: 10px;
   background-color: #ff4655;
@@ -166,5 +180,13 @@ p:hover {
 }
 .desktop-link-item:hover .desktop-link-item-underline {
   opacity: 1;
+}
+
+.router-link-content {
+  color: white;
+}
+
+.router-link-content:hover {
+  color: #ff4655;
 }
 </style>
