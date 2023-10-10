@@ -35,24 +35,28 @@ const menuMouseLeave = () => {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
   z-index: 1;
+  margin-left: 25%;
   background-color: #292929;
-  color: #c7c7c7;
   min-height: 100px;
-  min-width: 200px;
+  min-width: 160px;
   padding: 10%;
+  margin-bottom: 10px;
 }
 
 .desktop-link-item-underline {
   height: 4px;
-  width: 100%;
+  width: 131%;
+  margin-left: 25%;
   border-radius: 10px;
   background-color: #ff4655;
   opacity: 0;
   transition: opacity 0.3s ease;
-  margin-top: -10px;
+  margin-top: -17px;
   border-radius: 2px 2px 0px 0px;
+}
+.dropdown-menu > ul > li {
+  margin-bottom: 10px;
 }
 
 .dropdown-menu-item:hover .desktop-link-item-underline {

@@ -183,10 +183,23 @@ p:hover {
 }
 
 .router-link-content {
-  color: white;
+  color: #c7c7c7;
+  text-decoration: none;
+  margin-bottom: 10px;
 }
 
 .router-link-content:hover {
-  color: #ff4655;
+  display: flex;
+
+  background-color: #615f5e;
+  transition: background-color 0.1s ease-in-out;
+  border-radius: 0.5rem;
+}
+.router-link-content a {
+  text-decoration: none !important;
+}
+
+.dropdown-menu-item a {
+  text-decoration: none;
 }
 </style>
