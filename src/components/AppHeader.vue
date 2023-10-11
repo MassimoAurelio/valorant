@@ -4,7 +4,13 @@ import DropdownMenuItem from './DropDownMenuItem.vue'
 
 <template>
   <div class="header-container">
-    <div class="riotbar-left-content"></div>
+    <div class="riotbar-left-content">
+      <router-link to="/" class="home">
+        <span class="logo">
+          <img src="../assets/img/logo.svg" alt="" class="my-img" />
+        </span>
+      </router-link>
+    </div>
     <nav class="riotbar-center-content">
       <div class="riotbar-desktop-navigation-wrapper">
         <DropdownMenuItem>
@@ -201,5 +207,13 @@ p:hover {
 
 .dropdown-menu-item a {
   text-decoration: none;
+}
+
+.my-img {
+  display: flex;
+  align-items: center;
+  height: 45px;
+  width: 45px;
+
 }
 </style>

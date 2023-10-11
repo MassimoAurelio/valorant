@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Header from './components/AppHeader.vue'
+import MainPage from './components/MainPage.vue'
 </script>
 
 <template>

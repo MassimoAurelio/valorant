@@ -5,6 +5,12 @@ const routes = [
     path: '/agents',
     name: 'Agents',
     component: () => import('../components/AgentsApp.vue')
+  },
+
+  {
+    path: '/',
+    name: 'Home',
+    component: () => import('../components/MainPage.vue')
   }
 ]
 
