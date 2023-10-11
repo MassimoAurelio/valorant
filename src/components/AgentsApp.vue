@@ -27,73 +27,113 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="slick-list">
-    <div id="main-container" v-for="(agent, index) in agents" :key="index">
-      <div class="agentsHero">
-        <span class="agent-index"></span>
-        <h2 class="name-agent">{{ agent?.displayName }}</h2>
-        <img :src="agent.bustPortrait" class="img-agent" alt="" />
-        <div class="info-agent">
-          <div style="font-weight: 600">//РОЛЬ</div>
-          <div class="role">
-            <h2>{{ agent?.role?.displayName }}</h2>
-            <img
-              :src="agent?.role?.displayIcon"
-              alt="Role icon"
-              style="height: 30px; width: 30px"
-            />
-          </div>
-          <h2>//БИОГРАФИЯ</h2>
-          <div class="description">{{ agent?.description }}</div>
-        </div>
+  <router-link to="/agents/jett">
+    <div class="agent-container">
+      <div class="div-agent">
+        <span class="span-agent">JETT</span>
       </div>
+    </div>
+  </router-link>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">REYNA</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Brimstone</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Astra</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Phoenix</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Breach</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Raze</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Chamber</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Cypher</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Sage</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Skye</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Sova</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Fade</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Viper</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Gekko</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent"> Yoru</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Harbor</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">KAYO</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Killjoy</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Neon</span>
+    </div>
+  </div>
+  <div class="agent-container">
+    <div class="div-agent">
+      <span class="span-agent">Omen</span>
     </div>
   </div>
 </template>
 
-<style scoped>
-.img-agent {
-  width: 30%;
-  height: auto;
-}
-
-.main-container {
-  position: relative;
-}
-
-.agentsHero {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.name-agent {
-  color: azure;
-  font-size: 70px;
-  height: 300px;
-  width: 300px;
-}
-
-.info-agent {
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-  color: azure;
-  font-weight: 300;
-  height: 300px;
-  width: 300px;
-}
-
-.role {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.name-agent {
-  display: flex;
-  align-items: center;
-}
-</style>
+<style scoped></style>
