@@ -28,112 +28,33 @@ onMounted(() => {
 
 <template>
   <router-link to="/agents/jett">
-    <div class="agent-container">
+    <div class="agent-container" v-for="(item, index) in agents" :key="index">
       <div class="div-agent">
-        <span class="span-agent">JETT</span>
+        <span class="span-agent">{{ item.displayName }}</span>
       </div>
     </div>
   </router-link>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">REYNA</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Brimstone</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Astra</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Phoenix</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Breach</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Raze</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Chamber</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Cypher</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Sage</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Skye</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Sova</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Fade</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Viper</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Gekko</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent"> Yoru</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Harbor</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">KAYO</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Killjoy</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Neon</span>
-    </div>
-  </div>
-  <div class="agent-container">
-    <div class="div-agent">
-      <span class="span-agent">Omen</span>
-    </div>
-  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.agent-container {
+  width: 300px;
+  font-size: 4rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: left;
+  font-weight: 1200;
+  display: flex;
+  align-items: center;
+  color: azure;
+  cursor: pointer;
+}
+
+.span-agent {
+  transition: all 0.3s;
+}
+
+.span-agent:hover {
+  margin-left: 10px;
+}
+</style>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import VideoAgentJett from '../Agents/AgentsVideo/VideoAgentJett.vue'
+
 
 interface Role {
   uuid: string
@@ -22,11 +24,12 @@ interface Umeniya {
   displayIcon: string
   displayName: string
   slot: string
+  description: string
 }
 
 const agent = ref<Agent | null>(null)
 const skills = ref<Umeniya | null>(null)
-const showDescription = ref(false)
+const showDescription = ref(true)
 
 const fetchAgent = async () => {
   try {
@@ -64,28 +67,28 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div class="cpecial-abilities" v-if="agent">
-      <h2>
-        <span> Special Abilities</span>
-      </h2>
-      <div class="abilities-container" v-for="(skill, index) in agent.abilities" :key="index">
-        <ul class="abilities-list">
-          <li class="abilities-img">
-            <img :src="skill.displayIcon" alt="" />
-          </li>
-        </ul>
-        <div class="abilities-description" v-show="showDescription">
-          <h3>
-            {{ skill.displayName }}
-          </h3>
-          <p>
-            {{ skill.description }}
-          </p>
+    <div class="skill-video-container">
+      <div class="cpecial-abilities" v-if="agent">
+        <h2>
+          <span> Special Abilities</span>
+        </h2>
+        <div class="abilities-container">
+          <ul class="abilities-img-container">
+            <li class="abilities-img" v-for="(skill, index) in agent.abilities" :key="index">
+              <img :src="skill.displayIcon" alt="skill-img" style="height: 50px; width: 50px" />
+              <div class="abilities-description" v-show="showDescription">
+                <h3>{{ skill.displayName }}</h3>
+                <p>{{ skill.description }}</p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
+      <VideoAgentJett />
     </div>
   </div>
 </template>
+
 <style scoped>
 .img-agent {
   width: 30%;
@@ -93,11 +96,12 @@ onMounted(() => {
   cursor: pointer;
 }
 
-.main-container {
+#main-container {
   position: relative;
 }
 
 .agentsHero {
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -107,8 +111,6 @@ onMounted(() => {
 .name-agent {
   color: azure;
   font-size: 70px;
-  height: 300px;
-  width: 300px;
   cursor: pointer;
 }
 
@@ -151,9 +153,38 @@ onMounted(() => {
   word-wrap: break-word;
 }
 
+.abilities-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.abilities-img-container {
+  display: flex;
+  flex-direction: column;
+}
 .abilities-img {
+  margin-right: 20px;
+}
+
+.special-abilities-video {
+  width: 500px;
+  margin-top: -15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 35px;
+}
+
+.skill-video-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+}
+
+.abilities-description {
+  height: 300px;
+  width: 300px;
 }
 </style>
