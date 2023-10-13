@@ -56,13 +56,6 @@ onMounted(() => {
         </div>
       </div>
     </router-link>
-    <router-link to="/agents/viper">
-      <div class="agent-container">
-        <div class="div-agent">
-          <span class="span-agent">VIPER</span>
-        </div>
-      </div>
-    </router-link>
   </div>
 </template>
 
@@ -92,5 +85,9 @@ onMounted(() => {
 }
 .router-link-active {
   text-decoration: none !important;
+}
+
+.router-link-exact-active .span-agent {
+  color: #ff4656;
 }
 </style>

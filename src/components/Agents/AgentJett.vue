@@ -50,20 +50,38 @@ onMounted(() => {
 
 <template>
   <div class="slick-list">
-    <div class="main-container">
-      <div class="agentsHero" v-if="agent">
-        <div class="agent-buttons">
-          <AgentButton />
-        </div>
-        <div class="agent-img"><img :src="agent.bustPortrait" class="img-agent" alt="" /></div>
-        <div class="info-agent" style="color: azure">
-          <div style="font-weight: 600">// ROLE</div>
-          <div class="role">
-            <h1>{{ agent.role.displayName }}</h1>
-            <img :src="agent.role.displayIcon" alt="Role icon" style="height: 30px; width: 30px" />
+    <div class="first-container">
+      <video
+        autoplay
+        muted
+        loop
+        data-testid
+        poster="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltbded518020183769/5eb26f5389bac8148a8006cc/agent-background-generic.JPG"
+      >
+        <source
+          src="https://assets.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt29d7c4f6bc077e9e/5eb26f54402b8b4d13a56656/agent-background-generic.mp4"
+          type="video/mp4"
+        />
+      </video>
+      <div class="main-container">
+        <div class="agentsHero" v-if="agent">
+          <div class="agent-buttons">
+            <AgentButton />
           </div>
-          <h3>// BIOGRAPHY</h3>
-          <div class="description">{{ agent.description }}</div>
+          <div class="agent-img"><img :src="agent.bustPortrait" class="img-agent" alt="" /></div>
+          <div class="info-agent" style="color: azure">
+            <div style="font-weight: 600">// ROLE</div>
+            <div class="role">
+              <h1>{{ agent.role.displayName }}</h1>
+              <img
+                :src="agent.role.displayIcon"
+                alt="Role icon"
+                style="height: 30px; width: 30px"
+              />
+            </div>
+            <h3>// BIOGRAPHY</h3>
+            <div class="description">{{ agent.description }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -77,10 +95,10 @@ onMounted(() => {
             <li class="abilities-img" v-for="(skill, index) in agent.abilities" :key="index">
               <img :src="skill.displayIcon" alt="skill-img" />
 
-              <div class="abilities-description" v-show="showDescription">
+              <!-- <div class="abilities-description" v-show="showDescription">
                 <h3>{{ skill.displayName }}</h3>
                 <p>{{ skill.description }}</p>
-              </div>
+              </div> -->
             </li>
           </ul>
         </div>
@@ -151,6 +169,33 @@ onMounted(() => {
   margin-bottom: 50px;
   height: auto;
   min-height: 50px;
-  /* width: 50%; */
+}
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.abilities-img-container {
+  border-color: #0f1923;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.abilities-img-container:hover {
+  background-position: left center;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.abilities-img img {
+  border: 1px solid #32333d;
 }
 </style>

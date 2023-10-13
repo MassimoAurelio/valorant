@@ -6,11 +6,11 @@ const routes = [
     name: 'Home',
     component: () => import('../components/MainPage.vue')
   },
-  {
+ /*  {
     path: '/agents',
     name: 'Agents',
     component: () => import('../components/AgentsApp.vue')
-  },
+  }, */
   {
     path: '/agents/jett',
     name: 'Jett',
@@ -30,11 +30,6 @@ const routes = [
     path: '/agents/omen',
     name: 'Omen',
     component: () => import('../components/Agents/AgentOmen.vue')
-  },
-  {
-    path: '/agents/viper',
-    name: 'Viper',
-    component: () => import('../components/Agents/AgentViper.vue')
   }
 ]
 

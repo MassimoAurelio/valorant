@@ -18,7 +18,7 @@ import DropdownMenuItem from './DropDownMenuItem.vue'
             <p>ОБ ИГРЕ</p>
           </div>
           <template #menu>
-            <router-link to="/agents" class="agents">
+            <router-link to="/agents/jett" class="agents">
               <div class="router-link-content">АГЕНТЫ</div>
             </router-link>
 
@@ -214,6 +214,5 @@ p:hover {
   align-items: center;
   height: 45px;
   width: 45px;
-
 }
 </style>
