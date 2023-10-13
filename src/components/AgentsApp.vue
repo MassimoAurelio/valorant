@@ -27,34 +27,70 @@ onMounted(() => {
 </script>
 
 <template>
-  <router-link to="/agents/jett">
-    <div class="agent-container" v-for="(item, index) in agents" :key="index">
-      <div class="div-agent">
-        <span class="span-agent">{{ item.displayName }}</span>
+  <div>
+    <router-link to="/agents/jett">
+      <div class="agent-container">
+        <div class="div-agent">
+          <span class="span-agent">JETT</span>
+        </div>
       </div>
-    </div>
-  </router-link>
+    </router-link>
+    <router-link to="/agents/gekko">
+      <div class="agent-container">
+        <div class="div-agent">
+          <span class="span-agent">GEKKO</span>
+        </div>
+      </div>
+    </router-link>
+    <router-link to="/agents/sage">
+      <div class="agent-container">
+        <div class="div-agent">
+          <span class="span-agent">SAGE</span>
+        </div>
+      </div>
+    </router-link>
+    <router-link to="/agents/omen">
+      <div class="agent-container">
+        <div class="div-agent">
+          <span class="span-agent">OMEN</span>
+        </div>
+      </div>
+    </router-link>
+    <router-link to="/agents/viper">
+      <div class="agent-container">
+        <div class="div-agent">
+          <span class="span-agent">VIPER</span>
+        </div>
+      </div>
+    </router-link>
+  </div>
 </template>
 
 <style scoped>
 .agent-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
   width: 300px;
   font-size: 4rem;
   text-transform: uppercase;
   font-weight: bold;
   text-align: left;
   font-weight: 1200;
-  display: flex;
-  align-items: center;
   color: azure;
   cursor: pointer;
 }
 
 .span-agent {
+  text-decoration: none !important;
+}
+.span-agent {
   transition: all 0.3s;
 }
-
 .span-agent:hover {
   margin-left: 10px;
+}
+.router-link-active {
+  text-decoration: none !important;
 }
 </style>

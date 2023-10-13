@@ -33,7 +33,7 @@ const showDescription = ref(true)
 const fetchAgent = async () => {
   try {
     const response = await fetch(
-      'https://valorant-api.com/v1/agents/add6443a-41bd-e414-f6ad-e58d267f4e95'
+      'https://valorant-api.com/v1/agents/8e253930-4c05-31dd-1b6c-968525494517'
     )
     const { data } = await response.json()
     agent.value = data
