@@ -86,10 +86,7 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <h2 class="title">
-      <span> Special Abilities</span>
-    </h2>
-    <AgentDescription />
+    <AgentDescription :agentId="'e370fa57-4757-3604-3648-499e1f642d3f'" />
   </div>
 </template>
 

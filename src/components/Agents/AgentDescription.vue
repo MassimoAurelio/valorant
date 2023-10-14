@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import AgentButton from '../AgentsApp.vue'
-import AgentDescription from '../Agents/AgentDescription.vue'
+import { ref, onMounted, defineProps } from 'vue'
+import VideoJett from '../Agents/AgentsVideo/VideoAgentJett.vue'
+
+const props = defineProps({
+  agentId: String
+})
 
 interface Role {
   uuid: string
@@ -29,18 +32,18 @@ interface Umeniya {
 
 const agent = ref<Agent | null>(null)
 const skills = ref<Umeniya | null>(null)
-const showDescription = ref(true)
-const selectedSkill = ref(false)
+const selectedSkill = ref<Umeniya | null>(null)
 
-const selectSkill = (skill) => {
+const selectedSkillIndex = ref<number | undefined>(undefined)
+
+const selectSkill = (skill: Umeniya, index: number) => {
   selectedSkill.value = skill
+  selectedSkillIndex.value = index
 }
 
 const fetchAgent = async () => {
   try {
-    const response = await fetch(
-      'https://valorant-api.com/v1/agents/add6443a-41bd-e414-f6ad-e58d267f4e95'
-    )
+    const response = await fetch(`https://valorant-api.com/v1/agents/${props.agentId}`)
     const { data } = await response.json()
     agent.value = data
     skills.value = data.abilities
@@ -51,19 +54,19 @@ const fetchAgent = async () => {
 
 onMounted(() => {
   fetchAgent()
- 
 })
-
-
 </script>
 
 <template>
+  <h2 class="title">
+    <span> Special Abilities</span>
+  </h2>
   <div class="second-container">
     <div class="cpecial-abilities-container" v-if="agent">
       <div class="abilities-container">
         <ul class="abilities-img-container">
           <li class="abilities-img" v-for="(skill, index) in agent.abilities" :key="index">
-            <button class="skill-img-container" @click="selectSkill(skill)">
+            <button class="skill-img-container" @click="selectSkill(skill, index)">
               <img
                 :class="{ selected: selectedSkill === skill }"
                 class="skill-img"
@@ -74,11 +77,11 @@ onMounted(() => {
             </button>
           </li>
         </ul>
-        <!-- Элемент abilities-description переместился сюда, вне v-for -->
         <div class="abilities-description" v-if="selectedSkill">
           <h3>{{ selectedSkill.displayName }}</h3>
           <p>{{ selectedSkill.description }}</p>
         </div>
+        <VideoJett :selectedSkillIndex="selectedSkillIndex" />
       </div>
     </div>
   </div>
@@ -88,7 +91,20 @@ onMounted(() => {
 .skill-img {
   width: 72px;
   transition: filter 0.3s ease-in-out;
-  
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 100px;
+  padding-left: 7.3%;
+  padding-right: 7.3%;
+  font: bold;
 }
 .skill-img-container {
   position: relative;
@@ -124,6 +140,19 @@ onMounted(() => {
   height: 1000px;
   padding-left: 7.3%;
   padding-right: 7.3%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.abilities-description {
+  width: 500px;
+  margin-left: 250px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .abilities-img {
@@ -154,6 +183,7 @@ onMounted(() => {
   cursor: pointer;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: nowrap;
   list-style: none;
 }
@@ -161,8 +191,9 @@ onMounted(() => {
 .cpecial-abilities-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   width: 500px;
+  /* margin-left: 500px; */
   height: 100%;
   color: azure;
 }
