@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import AgentButton from '../AgentsApp.vue'
+import AgentDescription from '../Agents/AgentDescription.vue'
 
 interface Role {
   uuid: string
@@ -88,22 +89,7 @@ onMounted(() => {
     <h2 class="title">
       <span> Special Abilities</span>
     </h2>
-    <div class="second-container">
-      <div class="cpecial-abilities-container" v-if="agent">
-        <div class="abilities-container">
-          <ul class="abilities-img-container">
-            <li class="abilities-img" v-for="(skill, index) in agent.abilities" :key="index">
-              <img :src="skill.displayIcon" alt="skill-img" />
-
-              <div class="abilities-description" v-show="showDescription">
-                <h3>{{ skill.displayName }}</h3>
-                <p>{{ skill.description }}</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <AgentDescription />
   </div>
 </template>
 

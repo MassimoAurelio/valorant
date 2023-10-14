@@ -10,3 +10,10 @@ main {
     max-width: 600px;
     margin: auto;
 }
+
+ul {
+    display: inline;
+    list-style-type: circle;
+    margin: 0;
+    padding: 0;
+}
