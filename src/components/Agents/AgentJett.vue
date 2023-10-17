@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import AgentButton from '../AgentsApp.vue'
-import AgentDescription from '../Agents/AgentDescription.vue'
+import AgentButton from '../agents/AgentsApp.vue'
+import AgentDescription from '../common/AgentDescription.vue'
 
 interface Role {
   uuid: string
@@ -10,25 +10,24 @@ interface Role {
   displayIcon: string
 }
 
+interface Ability {
+  displayName: string
+  displayIcon: string
+  slot: string
+  description: string
+  video: string
+}
+
 interface Agent {
   displayName: string
   bustPortrait: string
   description: string
   role: Role
   displayIcon: string
-  abilities: Umeniya[]
-}
-
-interface Umeniya {
-  abilities: string
-  displayIcon: string
-  displayName: string
-  slot: string
-  description: string
+  abilities: Ability[]
 }
 
 const agent = ref<Agent | null>(null)
-const skills = ref<Umeniya | null>(null)
 
 const fetchAgent = async () => {
   try {
@@ -37,7 +36,6 @@ const fetchAgent = async () => {
     )
     const { data } = await response.json()
     agent.value = data
-    skills.value = data.abilities
   } catch (error) {
     console.error('Ошибка:', error)
   }

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DropdownMenuItem from './DropDownMenuItem.vue'
+import logo from '@/assets/img/logo.svg'
 </script>
 
 <template>
@@ -7,7 +8,7 @@ import DropdownMenuItem from './DropDownMenuItem.vue'
     <div class="riotbar-left-content">
       <router-link to="/" class="home">
         <span class="logo">
-          <img src="../assets/img/logo.svg" alt="" class="my-img" />
+          <img :src="logo" alt="Logo" class="my-img" />
         </span>
       </router-link>
     </div>

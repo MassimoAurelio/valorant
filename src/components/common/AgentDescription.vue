@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, defineProps } from 'vue'
-import VideoJett from '../Agents/AgentsVideo/VideoAgentJett.vue'
+import { toRefs } from 'vue'
+import videoData from '..//..//videos/video.json'
 
 const props = defineProps({
   agentId: String
@@ -31,10 +32,11 @@ interface Umeniya {
 }
 
 const agent = ref<Agent | null>(null)
-const skills = ref<Umeniya | null>(null)
+const skills = ref<Umeniya[] | null>(null)
 const selectedSkill = ref<Umeniya | null>(null)
-
 const selectedSkillIndex = ref<number | undefined>(undefined)
+const { agentId } = toRefs(props)
+const videoSrc = ref<string[]>([])
 
 const selectSkill = (skill: Umeniya, index: number) => {
   selectedSkill.value = skill
@@ -52,8 +54,13 @@ const fetchAgent = async () => {
   }
 }
 
-onMounted(() => {
-  fetchAgent()
+onMounted(async () => {
+  await fetchAgent()
+  videoSrc.value = videoData[agentId.value]
+  if (agent.value && agent.value.abilities && agent.value.abilities.length > 0) {
+    selectedSkill.value = agent.value.abilities[0]
+    selectedSkillIndex.value = 0
+  }
 })
 </script>
 
@@ -78,10 +85,19 @@ onMounted(() => {
           </li>
         </ul>
         <div class="abilities-description" v-if="selectedSkill">
-          <h3>{{ selectedSkill.displayName }}</h3>
-          <p>{{ selectedSkill.description }}</p>
+          <h3>{{ selectedSkill?.displayName }}</h3>
+          <p>{{ selectedSkill?.description }}</p>
+          <video
+            class="video"
+            :src="videoSrc[selectedSkill?.displayName]"
+            autoplay
+            muted
+            loop
+            data-testid="abilities:video"
+          >
+            <source :src="videoSrc[selectedSkill?.displayName]" type="video/mp4" />
+          </video>
         </div>
-        <VideoJett :selectedSkillIndex="selectedSkillIndex" />
       </div>
     </div>
   </div>
@@ -138,16 +154,15 @@ onMounted(() => {
 .second-container {
   position: relative;
   height: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding-left: 7.3%;
   padding-right: 7.3%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
 }
-
 .abilities-description {
   width: 500px;
-  margin-left: 250px;
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
@@ -193,8 +208,11 @@ onMounted(() => {
   flex-direction: row;
   justify-content: center;
   width: 500px;
-  /* margin-left: 500px; */
   height: 100%;
   color: azure;
+}
+
+.video {
+  width: 700px;
 }
 </style>

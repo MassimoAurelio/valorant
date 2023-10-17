@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import AgentButton from '../AgentsApp.vue'
-import AgentDescription from '../Agents/AgentDescription.vue'
+import AgentButton from '../agents/AgentsApp.vue'
+import AgentDescription from '../common/AgentDescription.vue'
 
 interface Role {
   uuid: string
@@ -29,7 +29,6 @@ interface Umeniya {
 
 const agent = ref<Agent | null>(null)
 const skills = ref<Umeniya | null>(null)
-const showDescription = ref(true)
 
 const fetchAgent = async () => {
   try {

@@ -4,32 +4,32 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../components/MainPage.vue')
+    component: () => import('../components/common/MainPage.vue')
   },
- /*  {
-    path: '/agents',
-    name: 'Agents',
-    component: () => import('../components/AgentsApp.vue')
-  }, */
   {
     path: '/agents/jett',
     name: 'Jett',
-    component: () => import('../components/Agents/AgentJett.vue')
+    component: () => import('../components/agents/AgentJett.vue')
   },
   {
     path: '/agents/gekko',
     name: 'Gekko',
-    component: () => import('../components/Agents/AgentGekko.vue')
+    component: () => import('../components/agents/AgentGekko.vue')
   },
   {
     path: '/agents/sage',
     name: 'Sage',
-    component: () => import('../components/Agents/AgentSage.vue')
+    component: () => import('../components/agents/AgentSage.vue')
   },
   {
     path: '/agents/omen',
     name: 'Omen',
-    component: () => import('../components/Agents/AgentOmen.vue')
+    component: () => import('../components/agents/AgentOmen.vue')
+  },
+  {
+    path: '/maps',
+    name: 'Maps',
+    component: () => import('../components/maps/MapsApps.vue')
   }
 ]
 
