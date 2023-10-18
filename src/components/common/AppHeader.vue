@@ -26,7 +26,7 @@ import logo from '@/assets/img/logo.svg'
             <router-link to="/maps" class="maps">
               <div class="router-link-content">КАРТЫ</div></router-link
             >
-            <router-link to="/arsenal" class="arsenal">
+            <router-link to="/guns" class="arsenal">
               <div class="router-link-content">АРСЕНАЛ</div></router-link
             >
           </template>
