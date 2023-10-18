@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 interface Map {
   listViewIcon: string
   displayName: string
   narrativeDescription: string
+  splash: string
 }
 
 const maps = ref<Map[]>([])
+const currentMap = ref<Map | null>(maps.value[0])
 
 const fetchAgent = async () => {
   try {
@@ -19,21 +21,41 @@ const fetchAgent = async () => {
   }
 }
 
+const nextMap = () => {
+  const currentIndex = maps.value.findIndex((map) => map === currentMap.value)
+  if (currentIndex < maps.value.length - 1) {
+    currentMap.value = maps.value[currentIndex + 1]
+  }
+}
+
+const prevMap = () => {
+  const currentIndex = maps.value.findIndex((map) => map === currentMap.value)
+  if (currentIndex < maps.value.length - 1) {
+    currentMap.value = maps.value[currentIndex - 1]
+  }
+}
+
 onMounted(async () => {
   await fetchAgent()
+})
+
+watch(maps, () => {
+  currentMap.value = maps.value[0]
 })
 </script>
 
 <template>
   <div class="image-container">
     <h2 class="title"><span>MAPS</span></h2>
-    <div class="main-container" v-for="(map, index) in maps" :key="index">
+    <div class="main-container">
       <div class="image-wrapper">
-        <img :src="map?.splash" alt="Map image" />
+        <img v-if="currentMap" :src="currentMap?.splash" alt="Map image" />
       </div>
       <div class="description-container">
-        <div class="description-name">{{ map?.displayName }}</div>
-        <div class="description">{{ map?.narrativeDescription }}</div>
+        <div class="description-name">{{ currentMap?.displayName }}</div>
+        <div class="description">{{ currentMap?.narrativeDescription }}</div>
+        <button class="back-button" @click="prevMap">Назад</button>
+        <button class="next-button" @click="nextMap">Вперед</button>
       </div>
     </div>
   </div>
@@ -85,5 +107,14 @@ img {
 .description {
   font-size: 18px;
   width: 700px;
+}
+
+.back-button,
+.next-button {
+  
+  margin-top: 20px;
+  width: 150px;
+  border-radius: 15px;
+  border: none;
 }
 </style>
