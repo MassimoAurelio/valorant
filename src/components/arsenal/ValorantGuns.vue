@@ -28,12 +28,16 @@ onMounted(async () => {
   <section>
     <div class="main-container">
       <div class="title">
-        <span>Выберите свое оружие</span>
+        <span class="first-span"
+          >CHOOSE YOUR <br />
+          WEAPON</span
+        >
         <div class="Dropdown">
-          <span>Все оружие</span>
+          <span class="second-span">All WEAPONS</span>
           <div class="drop-down-icon"></div>
         </div>
       </div>
+
       <div class="weaponList">
         <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
           <div class="weaponBlockValue">
@@ -55,22 +59,71 @@ onMounted(async () => {
   height: 100vh;
 }
 .title {
+  position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 .weaponList {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  width: 300px;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 100px;
 }
 
-.weaponBlockValue {
+.weaponBlock {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 300px;
+  width: 600px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.weaponBlockValue {
+  padding: 50px;
+}
+
+.weaponImg {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+}
+.weaponName {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f1923;
+  font-family: 'Tungsten-Bold', arial, georgia, sans-serif;
+  margin-bottom: 20px;
+}
+
+.first-span {
+  display: flex;
+  flex-direction: column;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0f1923;
+  font-family: 'Tungsten-Bold', arial, georgia, sans-serif;
+}
+
+.second-span {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f1923;
+  font-family: 'Tungsten-Bold', arial, georgia, sans-serif;
+}
+
+.Dropdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 </style>
