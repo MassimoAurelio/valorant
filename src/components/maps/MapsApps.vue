@@ -74,14 +74,15 @@ watch(maps, () => {
   padding: 20px;
   margin-bottom: 40px;
   justify-content: flex-start;
-  color: azure;
+  color: #0f1923;
 }
 .title {
   top: 0;
   z-index: 10;
-  font-size: 30px;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0f1923;
   margin-bottom: 20px;
-  color: azure;
 }
 .image-wrapper {
   width: 700px;
@@ -111,7 +112,6 @@ img {
 
 .back-button,
 .next-button {
-  
   margin-top: 20px;
   width: 150px;
   border-radius: 15px;

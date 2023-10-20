@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, defineProps } from 'vue'
 import { toRefs } from 'vue'
-import videoData from '..//..//videos/video.json'
+import videoData from '..//..//..//custopApi/video.json'
 
 const props = defineProps({
   agentId: String

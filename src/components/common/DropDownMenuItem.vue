@@ -20,9 +20,10 @@ const menuMouseLeave = () => {
     @mouseleave="menuMouseLeave()"
   >
     <a><slot></slot></a>
-    <div class="desktop-link-item-underline" style=""></div>
-    <div v-show="menuIsVisible" class="dropdown-menu">
-      <slot name="menu"></slot>
+    <div class="desktop-link-item-underline" style="">
+      <div v-show="menuIsVisible" class="dropdown-menu">
+        <slot name="menu"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -36,27 +37,19 @@ const menuMouseLeave = () => {
   position: absolute;
   top: 100%;
   z-index: 1;
-  margin-left: 25%;
-  background-color: #292929;
-  min-height: 100px;
-  min-width: 160px;
+  background-color: rgb(41, 41, 41);
+  min-height: 100%;
+  min-width: 100%;
   padding: 10%;
-  margin-bottom: 10px;
 }
 
 .desktop-link-item-underline {
   height: 4px;
-  width: 131%;
-  margin-left: 25%;
-  border-radius: 10px;
+  width: 120%;
   background-color: #ff4655;
   opacity: 0;
   transition: opacity 0.3s ease;
-  margin-top: -17px;
-  border-radius: 2px 2px 0px 0px;
-}
-.dropdown-menu > ul > li {
-  margin-bottom: 10px;
+  border-radius: 2px 2px 0 0;
 }
 
 .dropdown-menu-item:hover .desktop-link-item-underline {

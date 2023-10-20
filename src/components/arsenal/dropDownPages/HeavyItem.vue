@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import ArsenalDropDownMenu from './ArsenalDropDownMenu.vue'
+import ArsenalDropDownMenu from '../ArsenalDropDownMenu.vue'
 
 interface Guns {
   displayIcon: string
   displayName: string
   categoryText: string
+  category: string
 }
 
 const guns = ref<Guns[]>([])
@@ -14,28 +15,22 @@ const fetchGuns = async () => {
   try {
     const response = await fetch('https://valorant-api.com/v1/weapons')
     const { data } = await response.json()
-    guns.value = data
+    guns.value = data.filter((gun: Guns) => gun.category === `EEquippableCategory::Heavy`)
   } catch (error) {
     console.error('Ошибка:', error)
   }
 }
 
-onMounted(async () => {
-  fetchGuns()
-})
+onMounted(fetchGuns)
 </script>
 
 <template>
   <section>
     <div class="main-container">
       <div class="title">
-        <span class="first-span"
-          >CHOOSE YOUR <br />
-          WEAPON</span
-        >
+        <span class="first-span">CHOOSE YOUR <br />WEAPON</span>
         <ArsenalDropDownMenu />
       </div>
-
       <div class="weaponList">
         <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
           <div class="weaponBlockValue">
@@ -56,7 +51,6 @@ onMounted(async () => {
   padding-right: 7.3%;
   height: 100vh;
 }
-
 .title {
   position: relative;
   display: flex;

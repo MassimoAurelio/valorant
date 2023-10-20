@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import AgentButton from '../agents/AgentsApp.vue'
-import AgentDescription from '../common/AgentDescription.vue'
+import AgentDescription from '../common/descriptions/AgentDescription.vue'
 
 interface Role {
   uuid: string
