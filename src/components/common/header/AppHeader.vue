@@ -53,11 +53,12 @@ import RightContent from './RightHeaderContent.vue'
 </template>
 
 <style scoped>
+
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 32px;
+  padding: 2rem;
   background: #111111;
   color: white;
   font-weight: 500;
@@ -77,13 +78,14 @@ import RightContent from './RightHeaderContent.vue'
 
 .riotbar-center-content {
   width: 100%;
-  margin-left: 10%;
+  margin-left: 2%;
 }
 
 p {
-  padding: 7.5px 16px;
+  padding: 0.5rem 1rem;
+  margin-right: 0.25rem;
   text-align: center;
-  margin-right: 4px;
+ 
 }
 
 p:hover {

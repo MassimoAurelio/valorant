@@ -35,7 +35,7 @@ const routes = [
     path: '/guns',
     name: 'Guns',
     component: () => import('../components/arsenal/ValorantGuns.vue')
-  },
+  } /* ,
   {
     path: '/guns/rifle',
     name: 'Rifle',
@@ -70,6 +70,11 @@ const routes = [
     path: '/guns/sniper',
     name: 'Sniper',
     component: () => import('../components/arsenal/dropDownPages/SniperItem.vue')
+  } */,
+  {
+    path: '/guns/:weaponClass',
+    name: 'WeaponClass',
+    component: () => import('../components/arsenal/WeaponPage.vue')
   }
 ]
 
