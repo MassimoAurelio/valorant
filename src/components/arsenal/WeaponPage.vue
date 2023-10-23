@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import ArsenalDropDownMenu from '../arsenal/ArsenalDropDownMenu.vue'
 
@@ -14,7 +14,10 @@ const route = useRoute()
 const guns = ref<Guns[]>([])
 
 const fetchGuns = async () => {
-  let weaponClass = `${route.params.weaponClass}`
+  let weaponClass = `EEquippableCategory::${
+    (route.params.weaponClass as string).charAt(0).toUpperCase() +
+    (route.params.weaponClass as string).slice(1)
+  }`
   try {
     const response = await fetch('https://valorant-api.com/v1/weapons')
     const { data } = await response.json()
@@ -24,7 +27,9 @@ const fetchGuns = async () => {
   }
 }
 
-onMounted(fetchGuns)
+watchEffect(() => {
+  fetchGuns()
+})
 </script>
 
 <template>
