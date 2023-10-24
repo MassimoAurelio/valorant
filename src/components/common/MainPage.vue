@@ -46,12 +46,20 @@
 
 <style scoped>
 .video video {
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
   height: auto;
+  object-fit: cover;
 }
 
 .video {
   position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .second-container {
@@ -61,7 +69,7 @@
   flex-direction: column;
   justify-content: center;
   color: azure;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -96,5 +104,4 @@
   color: #ffffff;
   text-transform: uppercase;
 }
-
 </style>

@@ -35,15 +35,16 @@ onMounted(async () => {
         >
         <ArsenalDropDownMenu />
       </div>
-
       <div class="weaponList">
-        <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
-          <div class="weaponBlockValue">
-            <div class="weaponName">{{ weapon?.displayName }}</div>
-            <img class="weaponImg" :src="weapon?.displayIcon" alt="" />
-            <p class="weaponSummaryCard">{{ weapon?.categoryText }}</p>
+        <router-link to="/weapons/skins/skinClass" class="agents">
+          <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
+            <div class="weaponBlockValue">
+              <div class="weaponName">{{ weapon?.displayName }}</div>
+              <img class="weaponImg" :src="weapon?.displayIcon" alt="" />
+              <p class="weaponSummaryCard">{{ weapon?.categoryText }}</p>
+            </div>
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
   </section>
@@ -82,6 +83,10 @@ onMounted(async () => {
   width: 600px;
   margin-bottom: 30px;
   text-transform: uppercase;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 10px;
 }
 
 .weaponBlockValue {

@@ -3,33 +3,30 @@ import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import ArsenalDropDownMenu from '../arsenal/ArsenalDropDownMenu.vue'
 
-interface Guns {
+interface Skins {
   displayIcon: string
   displayName: string
-  categoryText: string
-  category: string
 }
 
 const route = useRoute()
-const guns = ref<Guns[]>([])
+const skins = ref<Skins[]>([])
 
-const fetchGuns = async () => {
-  let weaponClass = `EEquippableCategory::${
-    (route.params.weaponClass as string).charAt(0).toUpperCase() +
-    (route.params.weaponClass as string).slice(1)
-  }`
+const fetchSkins = async () => {
+  let weaponName = route.params.weaponClass
+    ? (route.params.weaponName as string).charAt(0).toUpperCase() +
+      (route.params.weaponName as string).slice(1)
+    : ''
   try {
-    const response = await fetch('https://valorant-api.com/v1/weapons/{weaponUuid}')
+    const response = await fetch('https://valorant-api.com/v1/weapons/skins')
     const { data } = await response.json()
-    guns.value = data.filter((gun: Guns) => gun.category === weaponClass)
-    console.log(weaponClass)
+    skins.value = data.filter((skin: Skins) => skin.displayName.includes(weaponName + ' Vandal'))
   } catch (error) {
     console.error('Ошибка:', error)
   }
 }
 
 watchEffect(() => {
-  fetchGuns()
+  fetchSkins()
 })
 </script>
 
@@ -41,20 +38,16 @@ watchEffect(() => {
         <ArsenalDropDownMenu />
       </div>
       <div class="weaponList">
-        <router-link to="/weapons/skins/skinClass" class="agents">
-          <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
-            <div class="weaponBlockValue">
-              <div class="weaponName">{{ weapon?.displayName }}</div>
-              <img class="weaponImg" :src="weapon?.displayIcon" alt="" />
-              <p class="weaponSummaryCard">{{ weapon?.categoryText }}</p>
-            </div>
+        <div class="weaponBlock" v-for="(weapon, index) in skins" :key="index">
+          <div class="weaponBlockValue">
+            <div class="weaponName">{{ weapon?.displayName }}</div>
+            <img class="weaponImg" :src="weapon?.displayIcon" alt="" />
           </div>
-        </router-link>
+        </div>
       </div>
     </div>
   </section>
 </template>
-
 <style scoped>
 .main-container {
   position: relative;
@@ -62,7 +55,6 @@ watchEffect(() => {
   padding-right: 7.3%;
   height: 100vh;
 }
-
 .title {
   position: relative;
   display: flex;

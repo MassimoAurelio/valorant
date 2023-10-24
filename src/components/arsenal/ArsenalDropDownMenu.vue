@@ -10,6 +10,7 @@ import DropdownMenuItem from '../common/DropDownMenuItem.vue'
         <div class="drop-down-icon"></div>
       </div>
       <template #menu>
+      
         <router-link to="/guns/" class="arsenal">
           <div class="router-link-content">ALL WEAPONS</div>
         </router-link>
