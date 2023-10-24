@@ -6,6 +6,27 @@ interface Guns {
   displayIcon: string
   displayName: string
   categoryText: string
+  shopData: Description[]
+  weaponStats: Stats[]
+  skins: Skins[]
+}
+
+interface Description {
+  category: string
+}
+
+interface Stats {
+  fireRate: Number
+  firstBulletAccuracy: Number
+  magazineSize: Number
+  reloadTimeSeconds: Number
+  runSpeedMultiplier: Number
+  shotgunPelletCount: Number
+}
+
+interface Skins {
+  displayName: string
+  displayIcon: string
 }
 
 const guns = ref<Guns[]>([])
@@ -36,12 +57,16 @@ onMounted(async () => {
         <ArsenalDropDownMenu />
       </div>
       <div class="weaponList">
-        <router-link to="/weapons/skins/skinClass" class="agents">
+        <router-link to="/weapons/skins/:skinClass" class="agents">
           <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
             <div class="weaponBlockValue">
               <div class="weaponName">{{ weapon?.displayName }}</div>
               <img class="weaponImg" :src="weapon?.displayIcon" alt="" />
-              <p class="weaponSummaryCard">{{ weapon?.categoryText }}</p>
+              <p class="weaponSummaryCard">{{ weapon?.shopData?.category }}</p>
+              <p class="weaponSummaryCard">Fire range: {{ weapon?.weaponStats?.fireRate }}</p>
+              <p class="weaponSummaryCard">
+                First Bullet Accuracy: {{ weapon?.weaponStats?.firstBulletAccuracy }}
+              </p>
             </div>
           </div>
         </router-link>

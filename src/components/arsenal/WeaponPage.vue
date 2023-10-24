@@ -19,7 +19,7 @@ const fetchGuns = async () => {
     (route.params.weaponClass as string).slice(1)
   }`
   try {
-    const response = await fetch('https://valorant-api.com/v1/weapons/{weaponUuid}')
+    const response = await fetch('https://valorant-api.com/v1/weapons/')
     const { data } = await response.json()
     guns.value = data.filter((gun: Guns) => gun.category === weaponClass)
     console.log(weaponClass)

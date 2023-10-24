@@ -48,6 +48,7 @@ watchEffect(() => {
     </div>
   </section>
 </template>
+
 <style scoped>
 .main-container {
   position: relative;
