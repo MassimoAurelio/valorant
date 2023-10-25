@@ -2,24 +2,20 @@
 import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import ArsenalDropDownMenu from '../arsenal/ArsenalDropDownMenu.vue'
-
+import SkinDropDownMenu from './SkinDropDownMenu.vue'
 interface Skins {
   displayIcon: string
   displayName: string
 }
 
-const route = useRoute()
+let route = useRoute()
 const skins = ref<Skins[]>([])
 
 const fetchSkins = async () => {
-  let weaponName = route.params.weaponClass
-    ? (route.params.weaponName as string).charAt(0).toUpperCase() +
-      (route.params.weaponName as string).slice(1)
-    : ''
   try {
     const response = await fetch('https://valorant-api.com/v1/weapons/skins')
     const { data } = await response.json()
-    skins.value = data.filter((skin: Skins) => skin.displayName.includes(weaponName + ' Vandal'))
+    skins.value = data.filter((skin: Skins) => skin.displayName.includes(route.params.skinClass))
   } catch (error) {
     console.error('Ошибка:', error)
   }
@@ -36,6 +32,7 @@ watchEffect(() => {
       <div class="title">
         <span class="first-span">CHOOSE YOUR <br />WEAPON</span>
         <ArsenalDropDownMenu />
+        <SkinDropDownMenu />
       </div>
       <div class="weaponList">
         <div class="weaponBlock" v-for="(weapon, index) in skins" :key="index">

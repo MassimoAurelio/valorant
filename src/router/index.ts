@@ -42,7 +42,7 @@ const routes = [
     component: () => import('../components/arsenal/WeaponPage.vue')
   },
   {
-    path: '/weapons/skins/:skinClass',
+    path: '/skins/:skinClass',
     name: 'SkinClass',
     component: () => import('../components/arsenal/SkinClass.vue')
   }

@@ -2,6 +2,7 @@
 import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import ArsenalDropDownMenu from '../arsenal/ArsenalDropDownMenu.vue'
+import SkinDropDownMenu from './SkinDropDownMenu.vue'
 
 interface Guns {
   displayIcon: string
@@ -39,17 +40,16 @@ watchEffect(() => {
       <div class="title">
         <span class="first-span">CHOOSE YOUR <br />WEAPON</span>
         <ArsenalDropDownMenu />
+        <SkinDropDownMenu />
       </div>
       <div class="weaponList">
-        <router-link to="/weapons/skins/skinClass" class="agents">
-          <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
-            <div class="weaponBlockValue">
-              <div class="weaponName">{{ weapon?.displayName }}</div>
-              <img class="weaponImg" :src="weapon?.displayIcon" alt="" />
-              <p class="weaponSummaryCard">{{ weapon?.categoryText }}</p>
-            </div>
+        <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
+          <div class="weaponBlockValue">
+            <div class="weaponName">{{ weapon?.displayName }}</div>
+            <img class="weaponImg" :src="weapon?.displayIcon" alt="" />
+            <p class="weaponSummaryCard">{{ weapon?.categoryText }}</p>
           </div>
-        </router-link>
+        </div>
       </div>
     </div>
   </section>

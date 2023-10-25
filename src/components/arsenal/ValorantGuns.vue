@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import ArsenalDropDownMenu from './ArsenalDropDownMenu.vue'
+import SkinDropDownMenu from './SkinDropDownMenu.vue'
 
 interface Guns {
   displayIcon: string
@@ -9,6 +10,7 @@ interface Guns {
   shopData: Description[]
   weaponStats: Stats[]
   skins: Skins[]
+  
 }
 
 interface Description {
@@ -55,21 +57,20 @@ onMounted(async () => {
           WEAPON</span
         >
         <ArsenalDropDownMenu />
+        <SkinDropDownMenu />
       </div>
       <div class="weaponList">
-        <router-link to="/weapons/skins/:skinClass" class="agents">
-          <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
-            <div class="weaponBlockValue">
-              <div class="weaponName">{{ weapon?.displayName }}</div>
-              <img class="weaponImg" :src="weapon?.displayIcon" alt="" />
-              <p class="weaponSummaryCard">{{ weapon?.shopData?.category }}</p>
-              <p class="weaponSummaryCard">Fire range: {{ weapon?.weaponStats?.fireRate }}</p>
-              <p class="weaponSummaryCard">
-                First Bullet Accuracy: {{ weapon?.weaponStats?.firstBulletAccuracy }}
-              </p>
-            </div>
+        <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
+          <div class="weaponBlockValue">
+            <div class="weaponName">{{ weapon?.displayName }}</div>
+            <img class="weaponImg" :src="weapon?.displayIcon" alt="" />
+            <p class="weaponSummaryCard">{{ weapon?.shopData?.category }}</p>
+            <p class="weaponSummaryCard">Fire range: {{ weapon?.weaponStats?.fireRate }}</p>
+            <p class="weaponSummaryCard">
+              First Bullet Accuracy: {{ weapon?.weaponStats?.firstBulletAccuracy }}
+            </p>
           </div>
-        </router-link>
+        </div>
       </div>
     </div>
   </section>
