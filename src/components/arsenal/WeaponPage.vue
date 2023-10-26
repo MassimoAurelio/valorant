@@ -23,7 +23,6 @@ const fetchGuns = async () => {
     const response = await fetch('https://valorant-api.com/v1/weapons/')
     const { data } = await response.json()
     guns.value = data.filter((gun: Guns) => gun.category === weaponClass)
-    console.log(weaponClass)
   } catch (error) {
     console.error('Ошибка:', error)
   }

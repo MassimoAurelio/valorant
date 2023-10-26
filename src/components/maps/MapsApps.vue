@@ -54,8 +54,8 @@ watch(maps, () => {
       <div class="description-container">
         <div class="description-name">{{ currentMap?.displayName }}</div>
         <div class="description">{{ currentMap?.narrativeDescription }}</div>
-        <button class="back-button" @click="prevMap">Назад</button>
-        <button class="next-button" @click="nextMap">Вперед</button>
+        <button class="back-button" @click="prevMap">Back</button>
+        <button class="next-button" @click="nextMap">Forward</button>
       </div>
     </div>
   </div>
@@ -108,6 +108,7 @@ img {
 .description {
   font-size: 18px;
   width: 700px;
+  min-height: 100px;
 }
 
 .back-button,

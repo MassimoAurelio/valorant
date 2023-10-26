@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Header from './components/common/header/AppHeader.vue'
+
 </script>
 
 <template>

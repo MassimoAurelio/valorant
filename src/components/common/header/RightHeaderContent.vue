@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import SearchHeader from './SearchHeader.vue'
+import { ref } from 'vue'
+import PopupComponent from './GamePopup.vue'
+let showPopup = ref(false)
+
+const togglePopup = () => {
+  showPopup.value = !showPopup.value
+}
 </script>
 
 <template>
@@ -21,9 +28,10 @@ import SearchHeader from './SearchHeader.vue'
     </div>
     <div class="riotbar-account-container">
       <div class="riotbar-account-anonymous-link-wrapper">
-        <span class="button-game">ИГРАТЬ</span>
+        <span class="button-game" @click="togglePopup">ИГРАТЬ</span>
       </div>
     </div>
+    <PopupComponent v-if="showPopup" />
   </div>
 </template>
 
