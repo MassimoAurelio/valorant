@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import ArsenalDropDownMenu from '../arsenal/ArsenalDropDownMenu.vue'
 import SkinDropDownMenu from './SkinDropDownMenu.vue'
@@ -21,18 +21,23 @@ const fetchSkins = async () => {
   }
 }
 
-watchEffect(() => {
-  fetchSkins()
-})
+watch(
+  () => route.params.skinClass,
+  () => {
+    fetchSkins()
+  }
+)
 </script>
 
 <template>
   <section>
     <div class="main-container">
       <div class="title">
-        <span class="first-span">CHOOSE YOUR <br />WEAPON</span>
-        <ArsenalDropDownMenu />
-        <SkinDropDownMenu />
+        <span class="first-span">CHOOSE YOUR WEAPON</span>
+        <div class="drop-boxs">
+          <div class="arsenal-dropdown"><ArsenalDropDownMenu /></div>
+          <div class="skin-dropdown"><SkinDropDownMenu /></div>
+        </div>
       </div>
       <div class="weaponList">
         <div class="weaponBlock" v-for="(weapon, index) in skins" :key="index">
@@ -53,11 +58,14 @@ watchEffect(() => {
   padding-right: 7.3%;
   height: 100vh;
 }
+
 .title {
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+
   margin-top: 20px;
 }
 
@@ -68,7 +76,15 @@ watchEffect(() => {
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  margin-top: 100px;
+}
+
+.drop-boxs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: 440px;
 }
 
 .weaponBlock {
@@ -76,6 +92,8 @@ watchEffect(() => {
   flex-direction: column;
   justify-content: center;
   width: 600px;
+  min-height: 500px; 
+  max-height: 400px;
   margin-bottom: 30px;
   text-transform: uppercase;
   border: 2px solid #000;
@@ -104,9 +122,14 @@ watchEffect(() => {
 .first-span {
   display: flex;
   flex-direction: column;
-  font-size: 3rem;
+  justify-content: space-between;
+  font-size: 2rem;
   font-weight: 800;
   color: #0f1923;
   font-family: 'Tungsten-Bold', arial, georgia, sans-serif;
+}
+
+.skin-dropdown {
+  margin-left: 50px;
 }
 </style>

@@ -1,10 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SearchHeader from './SearchHeader.vue'
+</script>
 
 <template>
   <div class="riotbar-right-content">
-    <div class="riotbar-search-container">
-      <img src="..//..//..//assets//img/search.svg" alt="" />
-    </div>
+    <SearchHeader />
     <div class="riotbar-locale-switcher">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -49,8 +49,7 @@
   );
 }
 
-.riotbar-right-content .riotbar-search-container,
-.riotbar-right-content .riotbar-locale-switcher,
+.riotbar-right-content .riotbar-right-content .riotbar-locale-switcher,
 .riotbar-right-content .riotbar-account-container {
   display: flex;
   align-items: center;
@@ -60,16 +59,9 @@
 .riotbar-right-content {
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  align-items: center;
 }
 
-.riotbar-search-container {
-  display: flex;
-  background-color: #2b2a29;
-  transition: background-color 0.1s ease-in-out;
-  border-radius: 1.1rem;
-  padding: 6px 12px;
-}
 .button-game {
   display: flex;
   align-items: center;

@@ -38,9 +38,11 @@ watchEffect(() => {
   <section>
     <div class="main-container">
       <div class="title">
-        <span class="first-span">CHOOSE YOUR <br />WEAPON</span>
-        <ArsenalDropDownMenu />
-        <SkinDropDownMenu />
+        <span class="first-span">CHOOSE YOUR WEAPON</span>
+        <div class="drop-boxs">
+          <div class="arsenal-dropdown"><ArsenalDropDownMenu /></div>
+          <div class="skin-dropdown"><SkinDropDownMenu /></div>
+        </div>
       </div>
       <div class="weaponList">
         <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
@@ -67,7 +69,9 @@ watchEffect(() => {
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+
   margin-top: 20px;
 }
 
@@ -78,7 +82,15 @@ watchEffect(() => {
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  margin-top: 100px;
+}
+
+.drop-boxs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: 440px;
 }
 
 .weaponBlock {
@@ -114,9 +126,14 @@ watchEffect(() => {
 .first-span {
   display: flex;
   flex-direction: column;
-  font-size: 3rem;
+  justify-content: space-between;
+  font-size: 2rem;
   font-weight: 800;
   color: #0f1923;
   font-family: 'Tungsten-Bold', arial, georgia, sans-serif;
+}
+
+.skin-dropdown {
+  margin-left: 50px;
 }
 </style>
