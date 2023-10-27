@@ -1,4 +1,33 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
+
+const videoRef = ref<HTMLVideoElement | null>(null)
+const sourceRef = ref<HTMLSourceElement | null>(null)
+
+onMounted(() => {
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  }
+
+  const observer = new IntersectionObserver(handleIntersect, options)
+
+  function handleIntersect(entries: IntersectionObserverEntry[], observer: IntersectionObserver) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && videoRef.value && sourceRef.value) {
+        videoRef.value.setAttribute('src', sourceRef.value.getAttribute('data-src') || '')
+        videoRef.value.load()
+        observer.unobserve(videoRef.value)
+      }
+    })
+  }
+
+  if (videoRef.value) {
+    observer.observe(videoRef.value)
+  }
+})
+</script>
 
 <template>
   <section>
