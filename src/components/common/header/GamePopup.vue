@@ -11,12 +11,13 @@ const closePopup = () => {
 <template>
   <div class="main-container" v-if="isOpen">
     <div class="popup-container">
-      <div class="close-button">
-        <button class="close" @click="closePopup">
-          <span> <img src="../../../assets/img/close.svg" alt="" /></span>
-        </button>
-      </div>
       <div class="main-value">
+        <div class="close-button" @click="closePopup">
+          <div class="cross">
+            <span></span>
+            <span></span>
+          </div>
+        </div>
         <div class="heading-bold">
           <span class="slesh-leviy">\</span>
           <h3>ПРИГОТОВЬСЯ К ИГРЕ</h3>
@@ -59,7 +60,8 @@ const closePopup = () => {
 .popup-container {
   position: relative;
   height: 400px;
-  width: 1300px;
+  width: 100%;
+  max-width: 60vw;
   background-color: #0f1923;
   display: flex;
   justify-content: space-between;
@@ -71,9 +73,7 @@ const closePopup = () => {
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
 }
-.close-button {
-  align-self: flex-end;
-}
+
 .buttons-container {
   width: 100%;
   height: 100%;
@@ -83,12 +83,14 @@ const closePopup = () => {
   flex-grow: 1;
 }
 .main-value {
+  margin-bottom: 30px;
   width: 100%;
   height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .create-button {
@@ -124,6 +126,29 @@ const closePopup = () => {
   background-position: left center;
   color: #ffffff;
   border: 1px solid gray;
+}
+.cross {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.cross span {
+  position: absolute;
+  height: 22px;
+  width: 2px;
+  background-color: #fff;
+}
+
+.cross span:first-child {
+  transform: rotate(45deg);
+}
+
+.cross span:last-child {
+  transform: rotate(-45deg);
 }
 .auth {
   position: relative;
@@ -169,6 +194,8 @@ const closePopup = () => {
   font-size: 13px;
   font-weight: 300;
   margin-bottom: 10px;
+  line-height: 1.5;
+  letter-spacing: 1px;
 }
 
 .auth-button {
