@@ -2,6 +2,7 @@
 import SearchHeader from './SearchHeader.vue'
 import { ref } from 'vue'
 import PopupComponent from './GamePopup.vue'
+
 let showPopup = ref(false)
 
 const togglePopup = () => {
@@ -31,7 +32,11 @@ const togglePopup = () => {
         <span class="button-game" @click="togglePopup">ИГРАТЬ</span>
       </div>
     </div>
-    <PopupComponent v-if="showPopup" />
+    <PopupComponent
+      v-if="showPopup"
+      v-model:showPopup="showPopup"
+      @update:showPopup="showPopup = $event"
+    />
   </div>
 </template>
 

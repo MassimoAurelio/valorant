@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 
-let isOpen = ref(true)
+const props = defineProps({
+  showPopup: Boolean
+})
+
+const emit = defineEmits(['update:showPopup'])
 
 const closePopup = () => {
-  isOpen.value = false
+  emit('update:showPopup', false)
 }
 </script>
 
 <template>
-  <div class="main-container" v-if="isOpen">
+  <div class="main-container" v-if="props.showPopup">
     <div class="popup-container">
       <div class="main-value">
         <div class="close-button" @click="closePopup">
