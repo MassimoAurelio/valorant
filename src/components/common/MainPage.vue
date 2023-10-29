@@ -55,7 +55,7 @@ onMounted(() => {
             </svg>
           </div>
           <p class="text" data-testid="hero:subtitle">
-            Тактический шутер с матчами 5 на 5 и уникальными персонажами
+            A 5v5 character-based tactical shooter
           </p>
         </div>
         <button
@@ -65,7 +65,7 @@ onMounted(() => {
           data-testid="hero:button-download"
         >
           <div class="div-button">
-            <span class="qwe"></span><span class="span-igrat">ИГРАТЬ БЕСПЛАТНО</span>
+            <span class="qwe"></span><span class="span-igrat">PLAY FREE</span>
           </div>
         </button>
       </div>

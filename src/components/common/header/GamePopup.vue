@@ -24,19 +24,19 @@ const closePopup = () => {
         </div>
         <div class="heading-bold">
           <span class="slesh-leviy">\</span>
-          <h3>ПРИГОТОВЬСЯ К ИГРЕ</h3>
+          <h3>GET SET UP TO PLAY</h3>
           <span class="slesh-praviy">\</span>
         </div>
         <div class="create-button">
           <div class="left-button">
-            <span class="span-nad-cnopkoy">У меня еще нету аккаунта Riot</span>
+            <span class="span-nad-cnopkoy">I don’t have a Riot account yet</span>
             <button class="create">
               <span>Create</span>
             </button>
           </div>
           <div class="right-button">
             <div class="auth-button">
-              <span class="span-nad-cnopkoy">У меня уже есть аккаунт Riot</span>
+              <span class="span-nad-cnopkoy">I have a Riot account</span>
               <button class="auth">
                 <span>Authorization</span>
               </button>

@@ -29,7 +29,7 @@ const togglePopup = () => {
     </div>
     <div class="riotbar-account-container">
       <div class="riotbar-account-anonymous-link-wrapper">
-        <span class="button-game" @click="togglePopup">ИГРАТЬ</span>
+        <span class="button-game" @click="togglePopup">PLAY NOW</span>
       </div>
     </div>
     <PopupComponent

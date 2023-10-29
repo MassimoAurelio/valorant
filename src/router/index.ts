@@ -32,6 +32,11 @@ const routes = [
     component: () => import('../components/maps/MapsApps.vue')
   },
   {
+    path: '/bundle',
+    name: 'Bundle',
+    component: () => import('../components/bundle/BundlePage.vue')
+  },
+  {
     path: '/guns',
     name: 'Guns',
     component: () => import('../components/arsenal/ValorantGuns.vue')

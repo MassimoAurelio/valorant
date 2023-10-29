@@ -11,39 +11,42 @@ import RightContent from './RightHeaderContent.vue'
       <div class="riotbar-desktop-navigation-wrapper">
         <DropdownMenuItem>
           <div class="desktop-link-item" role="button" aria-haspopup="true" aria-expanded="false">
-            <p>ОБ ИГРЕ</p>
+            <p>GAME INFO</p>
           </div>
           <template #menu>
             <router-link to="/agents/jett" class="agents">
-              <div class="router-link-content">АГЕНТЫ</div>
+              <div class="router-link-content">AGENTS</div>
             </router-link>
 
             <router-link to="/maps" class="maps">
-              <div class="router-link-content">КАРТЫ</div></router-link
+              <div class="router-link-content">MAPS</div></router-link
             >
             <router-link to="/guns" class="arsenal">
-              <div class="router-link-content">АРСЕНАЛ</div></router-link
+              <div class="router-link-content">ARSENAL</div></router-link
+            >
+            <router-link to="/bundle" class="arsenal">
+              <div class="router-link-content">BUNDLE</div></router-link
             >
           </template>
         </DropdownMenuItem>
         <div class="desktop-link-item">
-          <p>МЕДИА</p>
+          <p>MEDIA</p>
           <div class="desktop-link-item-underline"></div>
         </div>
         <div class="desktop-link-item">
-          <p>НОВОСТИ</p>
+          <p>NEWS</p>
           <div class="desktop-link-item-underline"></div>
         </div>
         <div class="desktop-link-item">
-          <p>ТАБЛИЦА ЛИДЕРОВ</p>
+          <p>LEADERBOARDS</p>
           <div class="desktop-link-item-underline"></div>
         </div>
         <div class="desktop-link-item">
-          <p>ПОДДЕРЖКА</p>
+          <p>SUPPORT</p>
           <div class="desktop-link-item-underline"></div>
         </div>
         <div class="desktop-link-item">
-          <p>КИБЕРСПОРТ</p>
+          <p>ESPORTS</p>
           <div class="desktop-link-item-underline"></div>
         </div>
       </div>
@@ -53,7 +56,6 @@ import RightContent from './RightHeaderContent.vue'
 </template>
 
 <style scoped>
-
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -85,7 +87,6 @@ p {
   padding: 0.5rem 1rem;
   margin-right: 0.25rem;
   text-align: center;
- 
 }
 
 p:hover {
