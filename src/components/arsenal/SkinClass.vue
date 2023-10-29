@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import ArsenalDropDownMenu from '../arsenal/ArsenalDropDownMenu.vue'
 import SkinDropDownMenu from './SkinDropDownMenu.vue'
+
 interface Skins {
   displayIcon: string
   displayName: string
@@ -25,7 +26,8 @@ watch(
   () => route.params.skinClass,
   () => {
     fetchSkins()
-  }
+  },
+  { immediate: true }
 )
 </script>
 
@@ -92,7 +94,7 @@ watch(
   flex-direction: column;
   justify-content: center;
   width: 600px;
-  min-height: 500px; 
+  min-height: 500px;
   max-height: 400px;
   margin-bottom: 30px;
   text-transform: uppercase;
