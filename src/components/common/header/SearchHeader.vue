@@ -1,16 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 
 const searchTerm = ref('')
 const expanded = ref(false)
+const searchInput = ref(null)
 
 const openSearch = () => {
   expanded.value = true
+  nextTick(() => {
+    searchInput.value.focus()
+  })
 }
 
 const closeSearch = () => {
   expanded.value = false
+  searchTerm.value = ''
 }
+
+onMounted(() => {
+  nextTick(() => {
+    searchInput.value.focus()
+  })
+})
 </script>
 
 <template>
@@ -22,9 +33,13 @@ const closeSearch = () => {
         @click="openSearch"
         class="search-img"
       />
-      <transition name="fade">
-        <input v-show="expanded" v-model="searchTerm" class="search-input" @blur="closeSearch" />
-      </transition>
+      <input
+        v-show="expanded"
+        v-model="searchTerm"
+        class="search-input"
+        @blur="closeSearch"
+        ref="searchInput"
+      />
       <div v-show="expanded" class="close">
         <img src="../../../assets/img/close.svg" alt="" @click="closeSearch" />
       </div>
