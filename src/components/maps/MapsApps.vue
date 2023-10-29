@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 
 interface Map {
   listViewIcon: string
@@ -35,6 +35,14 @@ const prevMap = () => {
   }
 }
 
+const isFirstMap = computed(() => {
+  return maps.value.findIndex((map) => map === currentMap.value) === 0 ? 'visibility: hidden' : ''
+})
+
+const isLastMap = computed(() => {
+  return maps.value.findIndex((map) => map === currentMap.value) === 13 ? 'visibility: hidden' : ''
+})
+
 onMounted(async () => {
   await fetchAgent()
 })
@@ -54,8 +62,8 @@ watch(maps, () => {
       <div class="description-container">
         <div class="description-name">{{ currentMap?.displayName }}</div>
         <div class="description">{{ currentMap?.narrativeDescription }}</div>
-        <button class="back-button" @click="prevMap">Back</button>
-        <button class="next-button" @click="nextMap">Forward</button>
+        <button class="back-button" @click="prevMap" :style="isFirstMap">Back</button>
+        <button class="next-button" @click="nextMap" :style="isLastMap">Forward</button>
       </div>
     </div>
   </div>
@@ -71,7 +79,6 @@ watch(maps, () => {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 20px;
   margin-bottom: 40px;
   justify-content: flex-start;
   color: #0f1923;
@@ -100,6 +107,8 @@ img {
   flex-direction: column;
   justify-content: flex-start;
   flex-grow: 1;
+  width: 100%;
+  height: 100%;
 }
 .description-name {
   font-size: 30px;
@@ -113,9 +122,26 @@ img {
 
 .back-button,
 .next-button {
-  margin-top: 20px;
-  width: 150px;
-  border-radius: 15px;
+  width: 200px;
+  height: 30px;
+  position: relative;
+  background-size: 200% auto;
+  background-image: linear-gradient(to left, #0f1923 50%, #142331 50%);
+  transition: background-position 0.3s;
   border: none;
+  color: azure;
+  font-weight: 700;
+  font-family: 'Oswald', 'sans-serif';
+  cursor: pointer;
+  background-position: right center;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.back-button:hover,
+.next-button:hover {
+  background-position: left center;
+  color: #ffffff;
+  border: 1px solid #ff4655;
 }
 </style>
