@@ -6,15 +6,11 @@ import type { Agent } from '../../types/interfaces'
 const agent = ref<Agent | null>(null)
 
 const fetchAgent = async () => {
-  try {
-    const response = await fetch(
-      'https://valorant-api.com/v1/agents/add6443a-41bd-e414-f6ad-e58d267f4e95'
-    )
-    const { data } = await response.json()
-    agent.value = data
-  } catch (error) {
-    console.error('Ошибка:', error)
-  }
+  const response = await fetch(
+    'https://valorant-api.com/v1/agents/add6443a-41bd-e414-f6ad-e58d267f4e95'
+  )
+  const { data } = await response.json()
+  agent.value = data
 }
 
 onMounted(() => {

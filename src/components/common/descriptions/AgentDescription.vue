@@ -1,35 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted, defineProps } from 'vue'
 import { toRefs } from 'vue'
+import type { Role, Agent, Umeniya } from '../../../types/interfaces'
 import videoData from '..//..//..//custopApi/video.json'
 
 const props = defineProps({
   agentId: String
 })
-
-interface Role {
-  uuid: string
-  displayName: string
-  description: string
-  displayIcon: string
-}
-
-interface Agent {
-  displayName: string
-  bustPortrait: string
-  description: string
-  role: Role
-  displayIcon: string
-  abilities: Umeniya[]
-}
-
-interface Umeniya {
-  abilities: string
-  displayIcon: string
-  displayName: string
-  slot: string
-  description: string
-}
 
 const agent = ref<Agent | null>(null)
 const skills = ref<Umeniya[] | null>(null)
@@ -44,14 +21,10 @@ const selectSkill = (skill: Umeniya, index: number) => {
 }
 
 const fetchAgent = async () => {
-  try {
-    const response = await fetch(`https://valorant-api.com/v1/agents/${props.agentId}`)
-    const { data } = await response.json()
-    agent.value = data
-    skills.value = data.abilities
-  } catch (error) {
-    console.error('Ошибка:', error)
-  }
+  const response = await fetch(`https://valorant-api.com/v1/agents/${props.agentId}`)
+  const { data } = await response.json()
+  agent.value = data
+  skills.value = data.abilities
 }
 
 onMounted(async () => {

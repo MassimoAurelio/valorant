@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import DropdownMenuItem from '../common/DropDownMenuItem.vue'
+
+const weaponClass = ['heavy', 'rifle', 'shotgun', 'sidearm', 'sniper', 'smg', 'meele']
 </script>
 
 <template>
@@ -10,32 +12,12 @@ import DropdownMenuItem from '../common/DropDownMenuItem.vue'
         <div class="drop-down-icon"></div>
       </div>
       <template #menu>
-      
         <router-link to="/guns/" class="arsenal">
           <div class="router-link-content">ALL WEAPONS</div>
         </router-link>
-        <router-link to="/guns/heavy" class="arsenal">
-          <div class="router-link-content">HEAVY</div>
+        <router-link v-for="weap in weaponClass" :key="weap" :to="'/guns/' + weap" class="arsenal">
+          <div class="router-link-content">{{ weap.toUpperCase() }}</div>
         </router-link>
-
-        <router-link to="/guns/rifle" class="arsenal">
-          <div class="router-link-content">RIFLE</div></router-link
-        >
-        <router-link to="/guns/shotgun" class="arsenal">
-          <div class="router-link-content">SHOTGUN</div></router-link
-        >
-        <router-link to="/guns/sidearm" class="arsenal">
-          <div class="router-link-content">SIDEARM</div></router-link
-        >
-        <router-link to="/guns/sniper" class="arsenal">
-          <div class="router-link-content">SNIPER</div></router-link
-        >
-        <router-link to="/guns/smg" class="arsenal">
-          <div class="router-link-content">SMG</div></router-link
-        >
-        <router-link to="/guns/meele" class="arsenal">
-          <div class="router-link-content">MELEE</div></router-link
-        >
       </template>
     </DropdownMenuItem>
   </div>

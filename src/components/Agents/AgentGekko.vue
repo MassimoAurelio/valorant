@@ -9,16 +9,12 @@ const skills = ref<Umeniya | null>(null)
 const isLoading = ref(true)
 
 const fetchAgent = async () => {
-  try {
-    const response = await fetch(
-      'https://valorant-api.com/v1/agents/e370fa57-4757-3604-3648-499e1f642d3f'
-    )
-    const { data } = await response.json()
-    agent.value = data
-    skills.value = data.abilities
-  } catch (error) {
-    console.error('Ошибка:', error)
-  }
+  const response = await fetch(
+    'https://valorant-api.com/v1/agents/e370fa57-4757-3604-3648-499e1f642d3f'
+  )
+  const { data } = await response.json()
+  agent.value = data
+  skills.value = data.abilities
 }
 
 onMounted(async () => {

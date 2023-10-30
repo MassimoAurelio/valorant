@@ -3,23 +3,15 @@ import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import ArsenalDropDownMenu from '../arsenal/ArsenalDropDownMenu.vue'
 import SkinDropDownMenu from './SkinDropDownMenu.vue'
-
-interface Skins {
-  displayIcon: string
-  displayName: string
-}
+import type { Skins } from '..//../types/interfaces'
 
 let route = useRoute()
 const skins = ref<Skins[]>([])
 
 const fetchSkins = async () => {
-  try {
-    const response = await fetch('https://valorant-api.com/v1/weapons/skins')
-    const { data } = await response.json()
-    skins.value = data.filter((skin: Skins) => skin.displayName.includes(route.params.skinClass))
-  } catch (error) {
-    console.error('Ошибка:', error)
-  }
+  const response = await fetch('https://valorant-api.com/v1/weapons/skins')
+  const { data } = await response.json()
+  skins.value = data.filter((skin: Skins) => skin.displayName.includes(route.params.skinClass))
 }
 
 watch(

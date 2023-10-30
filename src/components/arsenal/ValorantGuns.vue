@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import ArsenalDropDownMenu from './ArsenalDropDownMenu.vue'
 import SkinDropDownMenu from './SkinDropDownMenu.vue'
+import type { Skins, Description, Stats } from '..//../types/interfaces'
 
 interface Guns {
   displayIcon: string
@@ -12,34 +13,12 @@ interface Guns {
   skins: Skins[]
 }
 
-interface Description {
-  category: string
-}
-
-interface Stats {
-  fireRate: Number
-  firstBulletAccuracy: Number
-  magazineSize: Number
-  reloadTimeSeconds: Number
-  runSpeedMultiplier: Number
-  shotgunPelletCount: Number
-}
-
-interface Skins {
-  displayName: string
-  displayIcon: string
-}
-
 const guns = ref<Guns[]>([])
 
 const fetchGuns = async () => {
-  try {
-    const response = await fetch('https://valorant-api.com/v1/weapons')
-    const { data } = await response.json()
-    guns.value = data
-  } catch (error) {
-    console.error('Ошибка:', error)
-  }
+  const response = await fetch('https://valorant-api.com/v1/weapons')
+  const { data } = await response.json()
+  guns.value = data
 }
 
 onMounted(async () => {
@@ -88,7 +67,7 @@ onMounted(async () => {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  
+
   margin-top: 20px;
 }
 
@@ -150,8 +129,7 @@ onMounted(async () => {
   font-family: 'Tungsten-Bold', arial, georgia, sans-serif;
 }
 
-.skin-dropdown{
+.skin-dropdown {
   margin-left: 50px;
-
 }
 </style>

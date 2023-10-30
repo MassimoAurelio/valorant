@@ -1,22 +1,14 @@
 import type ValorantGunsVue from '../arsenal/ValorantGuns.vue';
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-
-interface Bundle {
-  displayName: string
-  displayIcon: string
-}
+import type { Bundle } from '../..//types/interfaces'
 
 const bundles = ref<Bundle[]>([])
 
 const fetchButdle = async () => {
-  try {
-    const response = await fetch('https://valorant-api.com/v1/bundles')
-    const { data } = await response.json()
-    bundles.value = data
-  } catch {
-    console.log('error')
-  }
+  const response = await fetch('https://valorant-api.com/v1/bundles')
+  const { data } = await response.json()
+  bundles.value = data
 }
 
 onMounted(() => {

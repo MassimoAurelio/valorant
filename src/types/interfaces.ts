@@ -21,3 +21,33 @@ export interface Umeniya {
   slot: string
   description: string
 }
+export interface Skins {
+  displayIcon: string
+  displayName: string
+}
+
+export interface Description {
+  category: string
+}
+
+export interface Stats {
+  fireRate: Number
+  firstBulletAccuracy: Number
+  magazineSize: Number
+  reloadTimeSeconds: Number
+  runSpeedMultiplier: Number
+  shotgunPelletCount: Number
+}
+
+export interface Bundle {
+  displayName: string
+  displayIcon: string
+}
+
+
+export interface Map {
+  listViewIcon: string
+  displayName: string
+  narrativeDescription: string
+  splash: string
+}

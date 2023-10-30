@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from 'vue'
-
-interface Map {
-  listViewIcon: string
-  displayName: string
-  narrativeDescription: string
-  splash: string
-}
+import type { Map } from '../../types/interfaces'
 
 const maps = ref<Map[]>([])
 const currentMap = ref<Map | null>(maps.value[0])
