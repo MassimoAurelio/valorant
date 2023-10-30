@@ -3,15 +3,16 @@ import { ref, onMounted, nextTick } from 'vue'
 
 const searchTerm = ref('')
 const expanded = ref(false)
-const searchInput = ref(null)
+const searchInput = ref<HTMLElement | null>(null)
 
 const openSearch = () => {
   expanded.value = true
   nextTick(() => {
-    searchInput.value.focus()
+    if (searchInput.value) {
+      searchInput.value.focus()
+    }
   })
 }
-
 const closeSearch = () => {
   expanded.value = false
   searchTerm.value = ''
@@ -19,7 +20,9 @@ const closeSearch = () => {
 
 onMounted(() => {
   nextTick(() => {
-    searchInput.value.focus()
+    if (searchInput.value) {
+      searchInput.value.focus()
+    }
   })
 })
 </script>

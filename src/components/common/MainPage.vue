@@ -132,5 +132,6 @@ onMounted(() => {
   background-position: left center;
   color: #ffffff;
   text-transform: uppercase;
+  border: 0.5px solid #ff4655;
 }
 </style>

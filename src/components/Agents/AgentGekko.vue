@@ -2,33 +2,11 @@
 import { ref, onMounted } from 'vue'
 import AgentButton from '../agents/AgentsApp.vue'
 import AgentDescription from '../common/descriptions/AgentDescription.vue'
-
-interface Role {
-  uuid: string
-  displayName: string
-  description: string
-  displayIcon: string
-}
-
-interface Agent {
-  displayName: string
-  bustPortrait: string
-  description: string
-  role: Role
-  displayIcon: string
-  abilities: Umeniya[]
-}
-
-interface Umeniya {
-  abilities: string
-  displayIcon: string
-  displayName: string
-  slot: string
-  description: string
-}
+import type { Agent, Umeniya } from '../../types/interfaces'
 
 const agent = ref<Agent | null>(null)
 const skills = ref<Umeniya | null>(null)
+const isLoading = ref(true)
 
 const fetchAgent = async () => {
   try {
@@ -43,8 +21,10 @@ const fetchAgent = async () => {
   }
 }
 
-onMounted(() => {
-  fetchAgent()
+onMounted(async () => {
+  isLoading.value = true
+  await fetchAgent()
+  isLoading.value = false
 })
 </script>
 

@@ -2,31 +2,7 @@
 import { ref, onMounted } from 'vue'
 import AgentButton from '../agents/AgentsApp.vue'
 import AgentDescription from '../common/descriptions/AgentDescription.vue'
-
-interface Role {
-  uuid: string
-  displayName: string
-  description: string
-  displayIcon: string
-}
-
-interface Ability {
-  displayName: string
-  displayIcon: string
-  slot: string
-  description: string
-  video: string
-}
-
-interface Agent {
-  displayName: string
-  bustPortrait: string
-  description: string
-  role: Role
-  displayIcon: string
-  abilities: Ability[]
-}
-
+import type { Agent } from '../../types/interfaces'
 const agent = ref<Agent | null>(null)
 
 const fetchAgent = async () => {

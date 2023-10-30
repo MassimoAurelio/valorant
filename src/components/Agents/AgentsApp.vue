@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-
-interface Agent {
-  displayName: string
-  bustPortrait: string
-  description: string
-  role: string
-  displayIcon: string
-}
+import type { Agent } from '../../types/interfaces'
 
 const agents = ref<Agent[]>([])
 
@@ -74,20 +67,16 @@ onMounted(() => {
   cursor: pointer;
 }
 
-.span-agent {
-  text-decoration: none !important;
-}
-.span-agent {
-  transition: all 0.3s;
-}
 .span-agent:hover {
   margin-left: 10px;
 }
-.router-link-active {
-  text-decoration: none !important;
+
+a {
+  text-decoration: none;
 }
 
 .router-link-exact-active .span-agent {
   color: #ff4656;
+  text-decoration: none;
 }
 </style>
