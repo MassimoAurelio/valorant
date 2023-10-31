@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted, defineProps } from 'vue'
+import { ref, onMounted, defineProps, defineExpose } from 'vue'
 import { toRefs } from 'vue'
-import type { Role, Agent, Umeniya } from '../../../types/interfaces'
-import videoData from '..//..//..//custopApi/video.json'
+import type { Agent, Umeniya } from '../../../types/interfaces'
+import videoData from './video.json'
 
-const props = defineProps({
-  agentId: String
-})
+interface Props {
+  agentId: string
+}
+
+const props = defineProps<Props>()
 
 const agent = ref<Agent | null>(null)
 const skills = ref<Umeniya[] | null>(null)
@@ -34,6 +36,10 @@ onMounted(async () => {
     selectedSkill.value = agent.value.abilities[0]
     selectedSkillIndex.value = 0
   }
+})
+
+defineExpose({
+  selectSkill
 })
 </script>
 
