@@ -2,10 +2,11 @@
 import { ref, onMounted } from 'vue'
 import AgentButton from '../agents/AgentsApp.vue'
 import AgentDescription from '../common/descriptions/AgentDescription.vue'
-import type { Agent, Umeniya } from '../../types/interfaces'
+import type { Agent } from '../../types/interfaces'
+import { useSkillStore } from '../../stores/counter'
 
 const agent = ref<Agent | null>(null)
-const skills = ref<Umeniya | null>(null)
+const skillStore = useSkillStore()
 
 const fetchAgent = async () => {
   const response = await fetch(
@@ -13,7 +14,7 @@ const fetchAgent = async () => {
   )
   const { data } = await response.json()
   agent.value = data
-  skills.value = data.abilities
+  skillStore.setSkills(data.abilities)
 }
 
 onMounted(() => {

@@ -1,12 +1,32 @@
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import type { Agent, Umeniya } from '..//types/interfaces'
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
+export const useAgentStore = defineStore({
+  id: 'agent',
+  state: () => ({
+    agents: [] as Agent[]
+  }),
+  actions: {
+    setAgents(agents: Agent[]) {
+      this.agents = agents
+    },
+    addAgent(agent: Agent) {
+      this.agents.push(agent)
+    }
   }
+})
 
-  return { count, doubleCount, increment }
+export const useSkillStore = defineStore({
+  id: 'skill',
+  state: () => ({
+    skill: [] as Umeniya[]
+  }),
+  actions: {
+    setSkills(skills: Umeniya[]) {
+      this.skill = skills
+    },
+    addSkill(skill: Umeniya) {
+      this.skill.push(skill)
+    }
+  }
 })

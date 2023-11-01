@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import AgentButton from '../agents/AgentsApp.vue'
 import AgentDescription from '../common/descriptions/AgentDescription.vue'
 import type { Agent } from '../../types/interfaces'
+
 const agent = ref<Agent | null>(null)
 
 const fetchAgent = async () => {

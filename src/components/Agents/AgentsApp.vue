@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import type { Agent } from '../../types/interfaces'
+import { onMounted } from 'vue'
+import { useAgentStore } from '../../stores/counter'
 
-const agents = ref<Agent[]>([])
+const agentStore = useAgentStore()
 
 const fetchAgenst = async () => {
   const response = await fetch('https://valorant-api.com/v1/agents')
   const result = await response.json()
-  agents.value = result.data
+  agentStore.setAgents(result.data)
 }
 
 onMounted(() => {
