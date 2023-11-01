@@ -7,26 +7,6 @@ const routes = [
     component: () => import('../components/common/MainPage.vue')
   },
   {
-    path: '/agents/jett',
-    name: 'Jett',
-    component: () => import('../components/agents/AgentJett.vue')
-  },
-  {
-    path: '/agents/gekko',
-    name: 'Gekko',
-    component: () => import('../components/agents/AgentGekko.vue')
-  },
-  {
-    path: '/agents/sage',
-    name: 'Sage',
-    component: () => import('../components/agents/AgentSage.vue')
-  },
-  {
-    path: '/agents/omen',
-    name: 'Omen',
-    component: () => import('../components/agents/AgentOmen.vue')
-  },
-  {
     path: '/maps',
     name: 'Maps',
     component: () => import('../components/maps/MapsApps.vue')
@@ -47,9 +27,14 @@ const routes = [
     component: () => import('../components/arsenal/WeaponPage.vue')
   },
   {
-    path: '/skins/:skinClass',
-    name: 'SkinClass',
-    component: () => import('../components/arsenal/SkinClass.vue')
+    path: '/agents/',
+    name: 'agents',
+    component: () => import('../components/agents/ValorantAgents.vue')
+  },
+  {
+    path: '/agents/:agentsClass',
+    name: 'AgentPage',
+    component: () => import('../components/agents/AgentsPage.vue')
   }
 ]
 

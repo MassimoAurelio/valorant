@@ -14,7 +14,7 @@ import RightContent from './RightHeaderContent.vue'
             <p>GAME INFO</p>
           </div>
           <template #menu>
-            <router-link to="/agents/jett" class="agents">
+            <router-link to="/agents/" class="agents">
               <div class="router-link-content">AGENTS</div>
             </router-link>
 

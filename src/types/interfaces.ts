@@ -3,12 +3,14 @@ export interface Role {
   displayName: string
   description: string
   displayIcon: string
+  fullPortrait: string
 }
 
 export interface Agent {
   displayName: string
   bustPortrait: string
   description: string
+  fullPortrait: string
   role: Role
   displayIcon: string
   abilities: Umeniya[]
@@ -43,7 +45,6 @@ export interface Bundle {
   displayName: string
   displayIcon: string
 }
-
 
 export interface Map {
   listViewIcon: string
