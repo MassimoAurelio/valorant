@@ -1,16 +1,26 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
-import type { Agent } from '../../types/interfaces'
+import { ref, watch } from 'vue'
+import type { Agent, Role, Umeniya } from '../../types/interfaces'
 import { useRoute } from 'vue-router'
+import Popper from 'vue3-popper'
+import { useAgentStore } from '../../stores/counter'
 
 const route = useRoute()
 const agent = ref<Agent | null>(null)
+const role = ref<Role | null>(null)
+const skills = ref<Umeniya | null>(null)
 const agentsClass = route.params.agentsClass
+
+const agentStore = useAgentStore()
 
 const fetchAgent = async () => {
   const response = await fetch('https://valorant-api.com/v1/agents/' + agentsClass)
   const { data } = await response.json()
   agent.value = data
+  role.value = data.role
+  skills.value = data.abilities
+  agentStore.setAgents([data])
+  agentStore.addAgent(data)
 }
 
 watch(
@@ -26,32 +36,118 @@ watch(
   <section>
     <div class="main-container" v-if="agent">
       <div class="description">
-        <h1 class="name-agent">{{ agent?.displayName }}</h1>
-        <div class="description-agent">{{ agent?.description }}</div>
+        <div class="left-up-block">
+          <div class="name-img-agent">
+            <h1 class="name-agent">{{ agent?.displayName }}</h1>
+            <Popper>
+              <img class="img-role" :src="role.displayIcon" alt="" />
+              <template #content>
+                <div class="tooltip">{{ role.description }}</div>
+              </template>
+            </Popper>
+          </div>
+          <div class="description-agent">{{ agent?.description }}</div>
+        </div>
+        <img class="img-agent" :src="agent?.fullPortrait" alt="" />
       </div>
-      <img class="img-agent" :src="agent?.fullPortrait" alt="lazy" />
+      <nav v-if="skills" class="navigation-panel-skills">
+        <div class="main-container-skills" v-for="(abi, index) in skills" :key="index">
+          <div class="agent-skills">
+            {{ abi?.displayName }}
+          </div>
+          <img class="skill-img" :src="abi?.displayIcon" alt="" />
+        </div>
+      </nav>
     </div>
   </section>
 </template>
 
 <style scoped>
 .main-container {
-  height: 700px;
   position: relative;
-  display: flex;
-  padding-left: 20%;
-  padding-right: 20%;
-  padding-top: 5%;
-}
-.description {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.name-img-agent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.description-img-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.navigation-panel-skills {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding-top: 4%;
+}
+
+.skill-img {
+  width: 100px;
+}
+.description {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: azure;
 }
 .img-agent {
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
+}
+
+.img-role {
+  width: 25px;
+  height: 25px;
+}
+.name-agent {
+  margin-right: 10px;
+}
+.left-up-block {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tooltip {
+  background-color: #ff2739;
+  border-radius: 10px;
+  width: 200px;
+  height: 110px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.agent-skills {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  color: azure;
+  font-weight: 700;
+}
+.main-container-skills {
+  min-width: 100px;
+
+  border: 2px solid azure;
+  padding: 5%;
 }
 </style>

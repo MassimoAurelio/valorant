@@ -11,6 +11,7 @@ export interface Agent {
   bustPortrait: string
   description: string
   fullPortrait: string
+  displayIconSmall: string
   role: Role
   displayIcon: string
   abilities: Umeniya[]

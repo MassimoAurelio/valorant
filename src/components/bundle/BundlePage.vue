@@ -23,7 +23,7 @@ onMounted(() => {
         <span class="first-span">CHOOSE YOUR WEAPON</span>
       </div>
       <div class="weaponList">
-        <div class="weaponBlock" v-for="(weapon, index) in bundles" :key="index">
+        <div class="weaponBlock" v-for="weapon in bundles" :key="weapon.uuid">
           <div class="weaponBlockValue">
             <div class="weaponName">{{ weapon?.displayName }}</div>
             <img class="weaponImg" :src="weapon?.displayIcon" alt="" />

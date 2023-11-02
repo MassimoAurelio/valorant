@@ -37,7 +37,7 @@ onMounted(async () => {
         </div>
       </div>
       <div class="weaponList">
-        <div class="weaponBlock" v-for="(weapon, index) in guns" :key="index">
+        <div class="weaponBlock" v-for="weapon in guns" :key="weapon.uuid">
           <div class="weaponBlockValue">
             <div class="weaponName">{{ weapon?.displayName }}</div>
             <img class="weaponImg" :src="weapon?.displayIcon" alt="" />

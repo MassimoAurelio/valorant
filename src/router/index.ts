@@ -27,6 +27,11 @@ const routes = [
     component: () => import('../components/arsenal/WeaponPage.vue')
   },
   {
+    path: '/skins/:skinClass',
+    name: 'SkinClass',
+    component: () => import('../components/arsenal/SkinClass.vue')
+  },
+  {
     path: '/agents/',
     name: 'agents',
     component: () => import('../components/agents/ValorantAgents.vue')
