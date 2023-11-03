@@ -4,6 +4,7 @@ export interface Role {
   description: string
   displayIcon: string
   fullPortrait: string
+  
 }
 
 export interface Agent {

@@ -1,30 +1,27 @@
 <script setup lang="ts">
-import { ref, watch} from 'vue'
-import type { Agent, Role, Umeniya } from '../../types/interfaces'
+import { ref, watch } from 'vue'
+import type { Umeniya } from '../../types/interfaces'
 import { useRoute } from 'vue-router'
 import Popper from 'vue3-popper'
 import { useAgentStore } from '../../stores/counter'
 
 const route = useRoute()
-const agent = ref<Agent | null>(null)
-const role = ref<Role | null>(null)
-const skills = ref<Umeniya | null>(null)
-const selectedSkill = ref(null)
 const agentsClass = route.params.agentsClass
 const agentStore = useAgentStore()
+const selectedSkill = ref(null)
+const skills = ref<Umeniya | null>(null)
+
+const showSkillInfo = (abi) => {
+  selectedSkill.value = abi
+}
 
 const fetchAgent = async () => {
   const response = await fetch('https://valorant-api.com/v1/agents/' + agentsClass)
   const { data } = await response.json()
-  agent.value = data
-  role.value = data.role
   skills.value = data.abilities
   agentStore.setAgents([data])
   agentStore.addAgent(data)
-}
-
-const showSkillInfo = (abi) => {
-  selectedSkill.value = abi
+  showSkillInfo(skills.value[0])
 }
 
 watch(
@@ -34,27 +31,25 @@ watch(
   },
   { immediate: true }
 )
-
-
 </script>
 
 <template>
   <section>
-    <div class="main-container" v-if="agent">
+    <div class="main-container" v-if="agentStore.agents[0]">
       <div class="description">
         <div class="left-up-block">
           <div class="name-img-agent">
-            <h1 class="name-agent">{{ agent?.displayName }}</h1>
+            <h1 class="name-agent">{{ agentStore.agents[0]?.displayName }}</h1>
             <Popper>
-              <img class="img-role" :src="role.displayIcon" alt="" />
+              <img class="img-role" :src="agentStore.agents[0]?.role.displayIcon" alt="" />
               <template #content>
-                <div class="tooltip">{{ role.description }}</div>
+                <div class="tooltip">{{ agentStore.agents[0]?.role.description }}</div>
               </template>
             </Popper>
           </div>
-          <div class="description-agent">{{ agent?.description }}</div>
+          <div class="description-agent">{{ agentStore.agents[0]?.description }}</div>
         </div>
-        <img class="img-agent" :src="agent?.fullPortrait" alt="" />
+        <img class="img-agent" :src="agentStore.agents[0]?.fullPortrait" alt="" />
       </div>
       <nav v-if="skills" class="navigation-panel-skills">
         <div class="main-navigation" v-for="(abi, index) in skills" :key="index">
@@ -139,10 +134,12 @@ watch(
 
 .tooltip {
   background-color: #ff2739;
-  border-radius: 10px;
-  width: 200px;
-  height: 110px;
-  padding-left: 10px;
+  border-radius: 8px;
+  min-width: 200px;
+  max-width: 300px;
+  min-height: 110px;
+  max-height: 500px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -160,7 +157,7 @@ watch(
   width: 100%;
   cursor: pointer;
   border: 2px solid azure;
-  padding: 5%;
+  padding: 10%;
 }
 
 .skill-description {
