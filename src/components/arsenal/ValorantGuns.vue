@@ -40,7 +40,7 @@ onMounted(async () => {
         <div class="weaponBlock" v-for="weapon in guns" :key="weapon.uuid">
           <div class="weaponBlockValue">
             <div class="weaponName">{{ weapon?.displayName }}</div>
-            <img class="weaponImg" :src="weapon?.displayIcon" alt="" />
+            <img class="weaponImg" v-lazy="weapon?.displayIcon" alt="" />
             <p class="weaponSummaryCard">{{ weapon?.shopData?.category }}</p>
             <p class="weaponSummaryCard">Fire range: {{ weapon?.weaponStats?.fireRate }}</p>
             <p class="weaponSummaryCard">

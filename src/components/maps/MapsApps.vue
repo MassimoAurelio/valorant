@@ -51,7 +51,7 @@ watch(maps, () => {
     <h2 class="title"><span>MAPS</span></h2>
     <div class="main-container">
       <div class="image-wrapper">
-        <img v-if="currentMap" :src="currentMap?.splash" alt="Map image" />
+        <img v-if="currentMap" v-lazy="currentMap?.splash" alt="Map image" />
       </div>
       <div class="description-container">
         <div class="description-name">{{ currentMap?.displayName }}</div>

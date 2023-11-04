@@ -13,6 +13,7 @@ export interface Agent {
   description: string
   fullPortrait: string
   displayIconSmall: string
+  uuid:Number
   role: Role
   displayIcon: string
   abilities: Umeniya[]

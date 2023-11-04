@@ -26,7 +26,7 @@ onMounted(() => {
         <div class="weaponBlock" v-for="weapon in bundles" :key="weapon.uuid">
           <div class="weaponBlockValue">
             <div class="weaponName">{{ weapon?.displayName }}</div>
-            <img class="weaponImg" :src="weapon?.displayIcon" alt="" />
+            <img class="weaponImg" v-lazy="weapon?.displayIcon" alt="" />
           </div>
         </div>
       </div>

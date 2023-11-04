@@ -8,8 +8,8 @@ import { useAgentStore } from '../../stores/counter'
 const route = useRoute()
 const agentsClass = route.params.agentsClass
 const agentStore = useAgentStore()
-const selectedSkill = ref(null)
-const skills = ref<Umeniya | null>(null)
+const selectedSkill = ref<Umeniya | null>(null)
+const skills = ref<Umeniya[] | null>(null)
 
 const showSkillInfo = (abi) => {
   selectedSkill.value = abi
@@ -41,7 +41,7 @@ watch(
           <div class="name-img-agent">
             <h1 class="name-agent">{{ agentStore.agents[0]?.displayName }}</h1>
             <Popper>
-              <img class="img-role" :src="agentStore.agents[0]?.role.displayIcon" alt="" />
+              <img class="img-role" v-lazy="agentStore.agents[0]?.role.displayIcon" alt="" />
               <template #content>
                 <div class="tooltip">{{ agentStore.agents[0]?.role.description }}</div>
               </template>
@@ -49,15 +49,19 @@ watch(
           </div>
           <div class="description-agent">{{ agentStore.agents[0]?.description }}</div>
         </div>
-        <img class="img-agent" :src="agentStore.agents[0]?.fullPortrait" alt="" />
+        <img class="img-agent" v-lazy="agentStore.agents[0]?.fullPortrait" alt="" />
       </div>
       <nav v-if="skills" class="navigation-panel-skills">
         <div class="main-navigation" v-for="(abi, index) in skills" :key="index">
-          <div class="main-container-skills" @click="showSkillInfo(abi)">
+          <div
+            class="main-container-skills"
+            @click="showSkillInfo(abi)"
+            :class="{ 'selected-skill': selectedSkill === abi }"
+          >
             <div class="agent-skills">
               {{ abi?.displayName }}
             </div>
-            <img class="skill-img" :src="abi?.displayIcon" alt="" />
+            <img class="skill-img" v-lazy="abi?.displayIcon" alt="" />
           </div>
         </div>
       </nav>
@@ -166,6 +170,9 @@ watch(
 }
 
 .main-container-skills:hover {
-  border-color: rgb(221, 120, 120);
+  border-color: rgb(0, 0, 0);
+}
+.selected-skill {
+  border-color: black;
 }
 </style>

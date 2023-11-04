@@ -6,7 +6,7 @@ import logo from '@/assets/img/logo.svg'
   <div class="riotbar-left-content">
     <router-link to="/" class="home">
       <span class="logo">
-        <img :src="logo" alt="Logo" class="my-img" />
+        <img v-lazy="logo" alt="Logo" class="my-img" />
       </span>
     </router-link>
   </div>
