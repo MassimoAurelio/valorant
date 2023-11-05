@@ -19,7 +19,8 @@ export const useAgentStore = defineStore({
 export const useSkillStore = defineStore({
   id: 'skill',
   state: () => ({
-    skill: [] as Umeniya[]
+    skill: [] as Umeniya[],
+    selectedSkill: null as Umeniya | null
   }),
   actions: {
     setSkills(skills: Umeniya[]) {
@@ -27,6 +28,9 @@ export const useSkillStore = defineStore({
     },
     addSkill(skill: Umeniya) {
       this.skill.push(skill)
+    },
+    setSelectedSkill(skill: Umeniya) {
+      this.selectedSkill = skill
     }
   }
 })
