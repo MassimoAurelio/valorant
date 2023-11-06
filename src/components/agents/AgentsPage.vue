@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { watch } from 'vue'
-
+import { watch, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import Popper from 'vue3-popper'
-import { useAgentStore, useSkillStore } from '../../stores/counter'
+import type { Umeniya } from '../../types/interfaces'
+import { useAgentStore } from '../../stores/counter'
 
 const route = useRoute()
 const agentsClass = route.params.agentsClass
 const agentStore = useAgentStore()
-const skillStore = useSkillStore()
+const selectedSkill = ref<Umeniya | null>(null)
+const skills = ref<Umeniya[] | null>(null)
 
-const showSkillInfo = (abi) => {
-  skillStore.setSelectedSkill = abi
+const showSkillInfo = (abi: any) => {
+  selectedSkill.value = abi
 }
 
 const fetchAgent = async () => {
@@ -19,9 +20,8 @@ const fetchAgent = async () => {
   const { data } = await response.json()
   agentStore.setAgents([data])
   agentStore.addAgent(data)
-  skillStore.setSkills(data.abilities)
-
-  showSkillInfo(skillStore.skill[0])
+  skills.value = data.abilities
+  showSkillInfo(skills.value?.[0])
 }
 
 watch(
@@ -51,12 +51,12 @@ watch(
         </div>
         <img class="img-agent" v-lazy="agentStore.agents[0]?.fullPortrait" alt="" />
       </div>
-      <nav v-if="skillStore.skill" class="navigation-panel-skills">
-        <div class="main-navigation" v-for="(abi, index) in skillStore.skill" :key="index">
+      <nav v-if="skills" class="navigation-panel-skills">
+        <div class="main-navigation" v-for="(abi, index) in skills" :key="index">
           <div
             class="main-container-skills"
             @click="showSkillInfo(abi)"
-            :class="{ 'selected-skill': skillStore.selectedSkill === abi }"
+            :class="{ 'selected-skill': selectedSkill === abi }"
           >
             <div class="agent-skills">
               {{ abi?.displayName }}
@@ -65,8 +65,8 @@ watch(
           </div>
         </div>
       </nav>
-      <div v-if="skillStore.selectedSkill" class="skill-description">
-        {{ skillStore.selectedSkill.description }}
+      <div v-if="selectedSkill" class="skill-description">
+        {{ selectedSkill.description }}
       </div>
     </div>
   </section>
@@ -122,6 +122,7 @@ watch(
 }
 
 .img-role {
+  cursor: pointer;
   width: 25px;
   height: 25px;
 }

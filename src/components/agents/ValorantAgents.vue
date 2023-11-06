@@ -12,11 +12,11 @@ const fetchAgent = async () => {
   const response = await fetch('https://valorant-api.com/v1/agents/')
   const { data } = await response.json()
   const uuidToRemove = 'ded3520f-4264-bfed-162d-b080e2abccf9'
-  const filteredData = data.filter((agent) => agent.uuid !== uuidToRemove)
+  const filteredData = data.filter((agent: Agent) => agent.uuid !== uuidToRemove)
   agent.value = filteredData
   agentStore.addAgent(filteredData)
 }
-const navigateToHero = (uuid: string) => {
+const navigateToHero = (uuid: Agent) => {
   router.push('/agents/' + uuid)
 }
 

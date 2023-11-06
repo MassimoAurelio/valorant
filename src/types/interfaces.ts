@@ -4,7 +4,6 @@ export interface Role {
   description: string
   displayIcon: string
   fullPortrait: string
-  
 }
 
 export interface Agent {
@@ -13,7 +12,7 @@ export interface Agent {
   description: string
   fullPortrait: string
   displayIconSmall: string
-  uuid:Number
+  uuid: any
   role: Role
   displayIcon: string
   abilities: Umeniya[]
@@ -29,6 +28,7 @@ export interface Umeniya {
 export interface Skins {
   displayIcon: string
   displayName: string
+  uuid: string
 }
 
 export interface Description {
@@ -47,6 +47,7 @@ export interface Stats {
 export interface Bundle {
   displayName: string
   displayIcon: string
+  uuid: string
 }
 
 export interface Map {
@@ -54,4 +55,15 @@ export interface Map {
   displayName: string
   narrativeDescription: string
   splash: string
+}
+
+export interface Guns {
+  displayIcon: string
+  displayName: string
+  categoryText: string
+  uuid: string
+  category: string
+  shopData: Description
+  weaponStats: Stats
+  skins: Skins[]
 }

@@ -2,16 +2,7 @@
 import { ref, onMounted } from 'vue'
 import ArsenalDropDownMenu from './ArsenalDropDownMenu.vue'
 import SkinDropDownMenu from './SkinDropDownMenu.vue'
-import type { Skins, Description, Stats } from '..//../types/interfaces'
-
-interface Guns {
-  displayIcon: string
-  displayName: string
-  categoryText: string
-  shopData: Description[]
-  weaponStats: Stats[]
-  skins: Skins[]
-}
+import type { Guns } from '..//../types/interfaces'
 
 const guns = ref<Guns[]>([])
 

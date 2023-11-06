@@ -3,13 +3,7 @@ import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import ArsenalDropDownMenu from '../arsenal/ArsenalDropDownMenu.vue'
 import SkinDropDownMenu from './SkinDropDownMenu.vue'
-
-interface Guns {
-  displayIcon: string
-  displayName: string
-  categoryText: string
-  category: string
-}
+import type { Guns } from '..//../types/interfaces'
 
 const route = useRoute()
 const guns = ref<Guns[]>([])
