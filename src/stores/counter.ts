@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Agent, Umeniya } from '..//types/interfaces'
+import type { Agent, Umeniya, Map } from '..//types/interfaces'
 
 export const useAgentStore = defineStore({
   id: 'agent',
@@ -31,6 +31,21 @@ export const useSkillStore = defineStore({
     },
     setSelectedSkill(skill: Umeniya) {
       this.selectedSkill = skill
+    }
+  }
+})
+
+export const useMapsStore = defineStore({
+  id: 'Map',
+  state: () => ({
+    maps: [] as Map[]
+  }),
+  actions: {
+    setMaps(maps: Map[]) {
+      this.maps = maps
+    },
+    addMaps(maps: Map) {
+      this.maps.push(maps)
     }
   }
 })

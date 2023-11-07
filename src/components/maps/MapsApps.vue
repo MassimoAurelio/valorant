@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from 'vue'
 import type { Map } from '../../types/interfaces'
+import { useAgentStore } from '../../stores/counter'
 
 const maps = ref<Map[]>([])
 const currentMap = ref<Map | null>(maps.value[0])
+const agentStore = useAgentStore()
 
 const fetchAgent = async () => {
   try {
     const response = await fetch('https://valorant-api.com/v1/maps')
     const { data } = await response.json()
-    maps.value = data
+    agentStore.setMaps = data
+ /*    maps.value = data */
   } catch (error) {
     console.error('Ошибка:', error)
   }
