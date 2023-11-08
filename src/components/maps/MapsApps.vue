@@ -1,51 +1,42 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from 'vue'
-import type { Map } from '../../types/interfaces'
-import { useAgentStore } from '../../stores/counter'
+import { ref, onMounted, computed } from 'vue'
+import { useMapsStore } from '../../stores/counter'
 
-const maps = ref<Map[]>([])
-const currentMap = ref<Map | null>(maps.value[0])
-const agentStore = useAgentStore()
+const mapsStore = useMapsStore()
+const currentMapIndex = ref<number>(0)
 
 const fetchAgent = async () => {
   try {
     const response = await fetch('https://valorant-api.com/v1/maps')
     const { data } = await response.json()
-    agentStore.setMaps = data
- /*    maps.value = data */
+    mapsStore.setMaps(data)
   } catch (error) {
     console.error('Ошибка:', error)
   }
 }
 
 const nextMap = () => {
-  const currentIndex = maps.value.findIndex((map) => map === currentMap.value)
-  if (currentIndex < maps.value.length - 1) {
-    currentMap.value = maps.value[currentIndex + 1]
+  if (currentMapIndex.value < mapsStore.map.length - 1) {
+    currentMapIndex.value++
   }
 }
 
 const prevMap = () => {
-  const currentIndex = maps.value.findIndex((map) => map === currentMap.value)
-  if (currentIndex < maps.value.length - 1) {
-    currentMap.value = maps.value[currentIndex - 1]
+  if (currentMapIndex.value > 0) {
+    currentMapIndex.value--
   }
 }
 
 const isFirstMap = computed(() => {
-  return maps.value.findIndex((map) => map === currentMap.value) === 0 ? 'visibility: hidden' : ''
+  return currentMapIndex.value === 0 ? 'visibility: hidden' : ''
 })
 
 const isLastMap = computed(() => {
-  return maps.value.findIndex((map) => map === currentMap.value) === 13 ? 'visibility: hidden' : ''
+  return currentMapIndex.value === mapsStore.map.length - 1 ? 'visibility: hidden' : ''
 })
 
 onMounted(async () => {
   await fetchAgent()
-})
-
-watch(maps, () => {
-  currentMap.value = maps.value[0]
 })
 </script>
 
@@ -54,11 +45,17 @@ watch(maps, () => {
     <h2 class="title"><span>MAPS</span></h2>
     <div class="main-container">
       <div class="image-wrapper">
-        <img v-if="currentMap" v-lazy="currentMap?.splash" alt="Map image" />
+        <img
+          v-if="mapsStore.map.length"
+          v-lazy="mapsStore.map[currentMapIndex]?.splash"
+          alt="Map image"
+        />
       </div>
       <div class="description-container">
-        <div class="description-name">{{ currentMap?.displayName }}</div>
-        <div class="description">{{ currentMap?.narrativeDescription }}</div>
+        <div class="description-name">{{ mapsStore.map[currentMapIndex]?.displayName }}</div>
+        <div class="description">
+          {{ mapsStore.map[currentMapIndex]?.narrativeDescription }}
+        </div>
         <button class="back-button" @click="prevMap" :style="isFirstMap">Back</button>
         <button class="next-button" @click="nextMap" :style="isLastMap">Forward</button>
       </div>

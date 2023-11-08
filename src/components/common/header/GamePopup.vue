@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
+import { defineEmits } from 'vue'
+import { usePopupStore } from '../../../stores/counter'
 
-const props = defineProps({
-  showPopup: Boolean
-})
+const popupStore = usePopupStore()
 
 const emit = defineEmits(['update:showPopup'])
 
 const closePopup = () => {
-  emit('update:showPopup', false)
+  popupStore.togglePopup()
 }
 </script>
 
 <template>
-  <div class="main-container" v-if="props.showPopup">
+  <div class="main-container" v-if="popupStore.showPopup">
     <div class="popup-container">
       <div class="main-value">
         <div class="close-button" @click="closePopup">

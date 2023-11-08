@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import ArsenalDropDownMenu from './ArsenalDropDownMenu.vue'
 import SkinDropDownMenu from './SkinDropDownMenu.vue'
-import type { Guns } from '..//../types/interfaces'
+import { useWeaponStore } from '../../stores/counter'
 
-const guns = ref<Guns[]>([])
+const weaponStore = useWeaponStore()
 
 const fetchGuns = async () => {
   const response = await fetch('https://valorant-api.com/v1/weapons')
   const { data } = await response.json()
-  guns.value = data
+  weaponStore.setWeapon(data)
 }
 
 onMounted(async () => {
@@ -28,7 +28,7 @@ onMounted(async () => {
         </div>
       </div>
       <div class="weaponList">
-        <div class="weaponBlock" v-for="weapon in guns" :key="weapon.uuid">
+        <div class="weaponBlock" v-for="weapon in weaponStore.weapon" :key="weapon.uuid">
           <div class="weaponBlockValue">
             <div class="weaponName">{{ weapon?.displayName }}</div>
             <img class="weaponImg" v-lazy="weapon?.displayIcon" alt="" />

@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 import ArsenalDropDownMenu from '../arsenal/ArsenalDropDownMenu.vue'
 import SkinDropDownMenu from './SkinDropDownMenu.vue'
-import type { Skins } from '..//../types/interfaces'
+import type { Skins } from '../../types/interfaces'
+import { useWeaponStore } from '../../stores/counter'
 
 let route = useRoute()
-const skins = ref<Skins[]>([])
+const weaponStore = useWeaponStore()
 
 const fetchSkins = async () => {
   const response = await fetch('https://valorant-api.com/v1/weapons/skins')
   const { data } = await response.json()
-  skins.value = data.filter((skin: Skins) => skin.displayName.includes(route.params.skinClass))
+  const filteredSkins = data.filter((skin: Skins) =>
+    skin.displayName.includes(route.params.skinClass)
+  )
+  weaponStore.setSkins(filteredSkins)
 }
 
 watch(
@@ -34,10 +38,10 @@ watch(
         </div>
       </div>
       <div class="weaponList">
-        <div class="weaponBlock" v-for="weapon in skins" :key="weapon.uuid">
+        <div class="weaponBlock" v-for="skin in weaponStore.skin" :key="skin.uuid">
           <div class="weaponBlockValue">
-            <div class="weaponName">{{ weapon?.displayName }}</div>
-            <img class="weaponImg" v-lazy="weapon?.displayIcon" alt="" />
+            <div class="weaponName">{{ skin?.displayName }}</div>
+            <img class="weaponImg" v-lazy="skin?.displayIcon" alt="" />
           </div>
         </div>
       </div>

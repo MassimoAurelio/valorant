@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import SearchHeader from './SearchHeader.vue'
-import { ref } from 'vue'
 import PopupComponent from './GamePopup.vue'
 
-let showPopup = ref(false)
+import { usePopupStore } from '../../../stores/counter'
+
+const popupStore = usePopupStore()
 
 const togglePopup = () => {
-  showPopup.value = !showPopup.value
+  console.log('Function togglePopup was called!')
+  popupStore.togglePopup()
 }
 </script>
 
@@ -32,11 +34,8 @@ const togglePopup = () => {
         <span class="button-game" @click="togglePopup">PLAY NOW</span>
       </div>
     </div>
-    <PopupComponent
-      v-if="showPopup"
-      v-model:showPopup="showPopup"
-      @update:showPopup="showPopup = $event"
-    />
+    
+    <PopupComponent v-if="popupStore.showPopup" @update:showPopup="popupStore.showPopup = $event" />
   </div>
 </template>
 

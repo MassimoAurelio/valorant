@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Agent, Umeniya, Map } from '..//types/interfaces'
+import type { Agent, Umeniya, Map, Guns, Skins } from '..//types/interfaces'
 
 export const useAgentStore = defineStore({
   id: 'agent',
@@ -36,16 +36,50 @@ export const useSkillStore = defineStore({
 })
 
 export const useMapsStore = defineStore({
-  id: 'Map',
+  id: 'map',
   state: () => ({
-    maps: [] as Map[]
+    map: [] as Map[]
   }),
   actions: {
-    setMaps(maps: Map[]) {
-      this.maps = maps
+    setMaps(map: Map[]) {
+      this.map = map
     },
-    addMaps(maps: Map) {
-      this.maps.push(maps)
+    addMaps(map: Map) {
+      this.map.push(map)
+    }
+  }
+})
+
+export const usePopupStore = defineStore({
+  id: 'popup',
+  state: () => ({
+    showPopup: false
+  }),
+  actions: {
+    togglePopup() {
+      this.showPopup = !this.showPopup
+    }
+  }
+})
+
+export const useWeaponStore = defineStore({
+  id: 'weapon',
+  state: () => ({
+    weapon: [] as Guns[],
+    skin: [] as Skins[]
+  }),
+  actions: {
+    setWeapon(weapon: Guns[]) {
+      this.weapon = weapon
+    },
+    addWeapon(weapon: Guns) {
+      this.weapon.push(weapon)
+    },
+    setSkins(skin: Skins[]) {
+      this.skin = skin
+    },
+    getSkins(skin: Skins) {
+      this.skin.push(skin)
     }
   }
 })

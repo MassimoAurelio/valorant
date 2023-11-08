@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { usePopupStore } from '..//..//stores/counter'
 
 const videoRef = ref<HTMLVideoElement | null>(null)
 const sourceRef = ref<HTMLSourceElement | null>(null)
+const popupStore = usePopupStore()
+
+const togglePopup = () => {
+  popupStore.togglePopup()
+}
 
 onMounted(() => {
   const options = {
@@ -35,7 +41,7 @@ onMounted(() => {
       <div class="video">
         <video preload="true" autoplay muted loop data-testid="hero:video">
           <source
-            src="https://assets.contentstack.io/v3/assets/bltb6530b271fddd0b1/bltee455c2e719bb8b9/6494cf1ef1585c219370578e/Valorant_Deadlock_Homepage_Desktop.mp4"
+            src="https://assets.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt778f65cedfee54fd/63bcad5b08dfb21202a7794d/VAL_Ep6_Homepage-CG-Video_V5.mp4"
             type="video/mp4"
           />
         </video>
@@ -54,9 +60,7 @@ onMounted(() => {
               ></path>
             </svg>
           </div>
-          <p class="text" data-testid="hero:subtitle">
-            A 5v5 character-based tactical shooter
-          </p>
+          <p class="text" data-testid="hero:subtitle">A 5v5 character-based tactical shooter</p>
         </div>
         <button
           class="button-download"
@@ -64,7 +68,7 @@ onMounted(() => {
           data-interaction-id="valorant-home-hero-download"
           data-testid="hero:button-download"
         >
-          <div class="div-button">
+          <div class="div-button" @click="togglePopup">
             <span class="qwe"></span><span class="span-igrat">PLAY FREE</span>
           </div>
         </button>
