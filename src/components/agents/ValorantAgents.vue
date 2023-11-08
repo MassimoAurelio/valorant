@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import type { Agent } from '../../types/interfaces'
 import { useRouter } from 'vue-router'
 import { useAgentStore } from '../../stores/counter'
 
-const agent = ref<Agent | null>(null)
 const router = useRouter()
 const agentStore = useAgentStore()
 
@@ -13,8 +12,7 @@ const fetchAgent = async () => {
   const { data } = await response.json()
   const uuidToRemove = 'ded3520f-4264-bfed-162d-b080e2abccf9'
   const filteredData = data.filter((agent: Agent) => agent.uuid !== uuidToRemove)
-  agent.value = filteredData
-  agentStore.addAgent(filteredData)
+  agentStore.setAgents(filteredData)   
 }
 const navigateToHero = (uuid: Agent) => {
   router.push('/agents/' + uuid)
@@ -29,7 +27,7 @@ onMounted(fetchAgent)
     <div class="main-container">
       <div
         class="agent-cart"
-        v-for="hero in agent"
+        v-for="hero in agentStore.agents"  
         :key="hero.uuid"
         @click="navigateToHero(hero.uuid)"
       >
