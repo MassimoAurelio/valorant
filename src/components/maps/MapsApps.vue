@@ -56,8 +56,8 @@ onMounted(async () => {
         <div class="description">
           {{ mapsStore.map[currentMapIndex]?.narrativeDescription }}
         </div>
-        <button class="back-button" @click="prevMap" :style="isFirstMap">Back</button>
         <button class="next-button" @click="nextMap" :style="isLastMap">Forward</button>
+        <button class="back-button" @click="prevMap" :style="isFirstMap">Back</button>
       </div>
     </div>
   </div>

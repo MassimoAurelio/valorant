@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import DropdownMenuItem from '../common/DropDownMenuItem.vue'
+import { useWeaponStore } from '..//.//../stores/counter'
 
-const weaponClass = ['heavy', 'rifle', 'shotgun', 'sidearm', 'sniper', 'smg', 'meele']
+const weaponStore = useWeaponStore()
+
 </script>
 
 <template>
@@ -15,7 +17,12 @@ const weaponClass = ['heavy', 'rifle', 'shotgun', 'sidearm', 'sniper', 'smg', 'm
         <router-link to="/guns/" class="arsenal">
           <div class="router-link-content">ALL WEAPONS</div>
         </router-link>
-        <router-link v-for="weap in weaponClass" :key="weap" :to="'/guns/' + weap" class="arsenal">
+        <router-link
+          v-for="weap in weaponStore.weaponClass"
+          :key="weap"
+          :to="'/guns/' + weap"
+          class="arsenal"
+        >
           <div class="router-link-content">{{ weap.toUpperCase() }}</div>
         </router-link>
       </template>

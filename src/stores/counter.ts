@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Agent, Umeniya, Map, Guns, Skins } from '..//types/interfaces'
+import type { Agent, Umeniya, Map, Guns, Skins, Bundle } from '..//types/interfaces'
 
 export const useAgentStore = defineStore({
   id: 'agent',
@@ -50,6 +50,21 @@ export const useMapsStore = defineStore({
   }
 })
 
+export const useBundleStore = defineStore({
+  id: 'bundle',
+  state: () => ({
+    bundle: [] as Bundle[]
+  }),
+  actions: {
+    setBundle(bundle: Bundle[]) {
+      this.bundle = bundle
+    },
+    addBundle(bundle: Bundle) {
+      this.bundle.push(bundle)
+    }
+  }
+})
+
 export const usePopupStore = defineStore({
   id: 'popup',
   state: () => ({
@@ -66,7 +81,28 @@ export const useWeaponStore = defineStore({
   id: 'weapon',
   state: () => ({
     weapon: [] as Guns[],
-    skin: [] as Skins[]
+    skin: [] as Skins[],
+    weaponClass: ['heavy', 'rifle', 'shotgun', 'sidearm', 'sniper', 'smg', 'meele'] as string[],
+    skinsClass: [
+      'Odin',
+      'Ares',
+      'Vandal',
+      'Bulldog',
+      'Phantom',
+      'Judge',
+      'Bucky',
+      'Frenzy',
+      'Classic',
+      'Ghost',
+      'Sheriff',
+      'Shorty',
+      'Operator',
+      'Guardian',
+      'Marshal',
+      'Spectre',
+      'Stinger',
+      'Melee'
+    ] as string[]
   }),
   actions: {
     setWeapon(weapon: Guns[]) {

@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import ArsenalDropDownMenu from '../arsenal/ArsenalDropDownMenu.vue'
 import SkinDropDownMenu from './SkinDropDownMenu.vue'
 import type { Guns } from '..//../types/interfaces'
+import { useWeaponStore } from '..//..//stores/counter'
 
 const route = useRoute()
-const guns = ref<Guns[]>([])
+const weaponStore = useWeaponStore()
 
 const fetchGuns = async () => {
   let weaponClass = `EEquippableCategory::${
@@ -16,7 +17,7 @@ const fetchGuns = async () => {
 
   const response = await fetch('https://valorant-api.com/v1/weapons/')
   const { data } = await response.json()
-  guns.value = data.filter((gun: Guns) => gun.category === weaponClass)
+  weaponStore.weapon = data.filter((gun: Guns) => gun.category === weaponClass)
 }
 
 watchEffect(() => {
@@ -35,7 +36,7 @@ watchEffect(() => {
         </div>
       </div>
       <div class="weaponList">
-        <div class="weaponBlock" v-for="weapon in guns" :key="weapon.uuid">
+        <div class="weaponBlock" v-for="weapon in weaponStore.weapon" :key="weapon.uuid">
           <div class="weaponBlockValue">
             <div class="weaponName">{{ weapon?.displayName }}</div>
             <img class="weaponImg" v-lazy="weapon?.displayIcon" alt="" />

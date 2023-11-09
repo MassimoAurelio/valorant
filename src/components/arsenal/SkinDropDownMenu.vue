@@ -1,25 +1,8 @@
 <script setup lang="ts">
 import DropdownMenuItem from '../common/DropDownMenuItem.vue'
-const skins = [
-  'Odin',
-  'Ares',
-  'Vandal',
-  'Bulldog',
-  'Phantom',
-  'Judge',
-  'Bucky',
-  'Frenzy',
-  'Classic',
-  'Ghost',
-  'Sheriff',
-  'Shorty',
-  'Operator',
-  'Guardian',
-  'Marshal',
-  'Spectre',
-  'Stinger',
-  'Melee'
-]
+import { useWeaponStore } from '..//.//../stores/counter'
+const weaponStore = useWeaponStore()
+
 </script>
 
 <template>
@@ -30,7 +13,12 @@ const skins = [
         <div class="drop-down-icon"></div>
       </div>
       <template #menu>
-        <router-link v-for="skin in skins" :key="skin" :to="'/skins/' + skin" class="arsenal">
+        <router-link
+          v-for="skin in weaponStore.skinsClass"
+          :key="skin"
+          :to="'/skins/' + skin"
+          class="arsenal"
+        >
           <div class="router-link-content">{{ skin.toUpperCase() }}</div>
         </router-link>
       </template>

@@ -1,14 +1,14 @@
-import type ValorantGunsVue from '../arsenal/ValorantGuns.vue';
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import type { Bundle } from '../..//types/interfaces'
+import { onMounted } from 'vue'
+import { useBundleStore } from '..//../stores/counter'
 
-const bundles = ref<Bundle[]>([])
+
+const bundleStore = useBundleStore()
 
 const fetchButdle = async () => {
   const response = await fetch('https://valorant-api.com/v1/bundles')
   const { data } = await response.json()
-  bundles.value = data
+  bundleStore.bundle = data
 }
 
 onMounted(() => {
@@ -23,7 +23,7 @@ onMounted(() => {
         <span class="first-span">CHOOSE YOUR WEAPON</span>
       </div>
       <div class="weaponList">
-        <div class="weaponBlock" v-for="weapon in bundles" :key="weapon.uuid">
+        <div class="weaponBlock" v-for="weapon in bundleStore.bundle" :key="weapon.uuid">
           <div class="weaponBlockValue">
             <div class="weaponName">{{ weapon?.displayName }}</div>
             <img class="weaponImg" v-lazy="weapon?.displayIcon" alt="" />
@@ -61,14 +61,6 @@ onMounted(() => {
   width: 100%;
 }
 
-.drop-boxs {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-left: 440px;
-}
 
 .weaponBlock {
   display: flex;
@@ -108,9 +100,5 @@ onMounted(() => {
   font-weight: 800;
   color: #0f1923;
   font-family: 'Tungsten-Bold', arial, georgia, sans-serif;
-}
-
-.skin-dropdown {
-  margin-left: 50px;
 }
 </style>
