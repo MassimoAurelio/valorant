@@ -7,7 +7,6 @@ import { usePopupStore } from '../../../stores/counter'
 const popupStore = usePopupStore()
 
 const togglePopup = () => {
-  console.log('Function togglePopup was called!')
   popupStore.togglePopup()
 }
 </script>

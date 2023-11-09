@@ -8,12 +8,17 @@ const router = useRouter()
 const agentStore = useAgentStore()
 
 const fetchAgent = async () => {
-  const response = await fetch('https://valorant-api.com/v1/agents/')
-  const { data } = await response.json()
-  const uuidToRemove = 'ded3520f-4264-bfed-162d-b080e2abccf9'
-  const filteredData = data.filter((agent: Agent) => agent.uuid !== uuidToRemove)
-  agentStore.setAgents(filteredData)   
+  try {
+    const response = await fetch('https://valorant-api.com/v1/agents/')
+    const { data } = await response.json()
+    const uuidToRemove = 'ded3520f-4264-bfed-162d-b080e2abccf9'
+    const filteredData = data.filter((agent: Agent) => agent.uuid !== uuidToRemove)
+    agentStore.setAgents(filteredData)
+  } catch (error) {
+    console.error('WARNING:', error)
+  }
 }
+
 const navigateToHero = (uuid: Agent) => {
   router.push('/agents/' + uuid)
 }
@@ -27,7 +32,7 @@ onMounted(fetchAgent)
     <div class="main-container">
       <div
         class="agent-cart"
-        v-for="hero in agentStore.agents"  
+        v-for="hero in agentStore.agents"
         :key="hero.uuid"
         @click="navigateToHero(hero.uuid)"
       >

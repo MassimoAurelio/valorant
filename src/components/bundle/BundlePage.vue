@@ -2,13 +2,16 @@
 import { onMounted } from 'vue'
 import { useBundleStore } from '..//../stores/counter'
 
-
 const bundleStore = useBundleStore()
 
 const fetchButdle = async () => {
-  const response = await fetch('https://valorant-api.com/v1/bundles')
-  const { data } = await response.json()
-  bundleStore.bundle = data
+  try {
+    const response = await fetch('https://valorant-api.com/v1/bundles')
+    const { data } = await response.json()
+    bundleStore.bundle = data
+  } catch (error) {
+    console.error('WARNING:', error)
+  }
 }
 
 onMounted(() => {
@@ -60,7 +63,6 @@ onMounted(() => {
   flex-wrap: wrap;
   width: 100%;
 }
-
 
 .weaponBlock {
   display: flex;

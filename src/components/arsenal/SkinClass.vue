@@ -10,12 +10,16 @@ let route = useRoute()
 const weaponStore = useWeaponStore()
 
 const fetchSkins = async () => {
-  const response = await fetch('https://valorant-api.com/v1/weapons/skins')
-  const { data } = await response.json()
-  const filteredSkins = data.filter((skin: Skins) =>
-    skin.displayName.includes(route.params.skinClass)
-  )
-  weaponStore.setSkins(filteredSkins)
+  try {
+    const response = await fetch('https://valorant-api.com/v1/weapons/skins')
+    const { data } = await response.json()
+    const filteredSkins = data.filter((skin: Skins) =>
+      skin.displayName.includes(route.params.skinClass)
+    )
+    weaponStore.setSkins(filteredSkins)
+  } catch (error) {
+    console.error('WARNING:', error)
+  }
 }
 
 watch(

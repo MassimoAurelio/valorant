@@ -11,7 +11,7 @@ const fetchAgent = async () => {
     const { data } = await response.json()
     mapsStore.setMaps(data)
   } catch (error) {
-    console.error('Ошибка:', error)
+    console.error('WARNING:', error)
   }
 }
 

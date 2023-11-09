@@ -7,9 +7,13 @@ import { useWeaponStore } from '../../stores/counter'
 const weaponStore = useWeaponStore()
 
 const fetchGuns = async () => {
-  const response = await fetch('https://valorant-api.com/v1/weapons')
-  const { data } = await response.json()
-  weaponStore.setWeapon(data)
+  try {
+    const response = await fetch('https://valorant-api.com/v1/weapons')
+    const { data } = await response.json()
+    weaponStore.setWeapon(data)
+  } catch (error) {
+    console.error('WARNING:', error)
+  }
 }
 
 onMounted(async () => {

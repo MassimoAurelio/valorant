@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch } from 'vue'
+import { watch, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Popper from 'vue3-popper'
 import { useAgentStore, useSkillStore } from '../../stores/counter'
@@ -9,17 +9,24 @@ const agentsClass = route.params.agentsClass
 const agentStore = useAgentStore()
 const skillStore = useSkillStore()
 
+//Создал для читабельности т.к в template везде использовать agentStore.agents[0] некрасиво 🤢
+const agent = computed(() => agentStore.agents[0])
+
 const showSkillInfo = (abi: any) => {
   skillStore.setSelectedSkill(abi)
 }
 
 const fetchAgent = async () => {
-  const response = await fetch('https://valorant-api.com/v1/agents/' + agentsClass)
-  const { data } = await response.json()
-  agentStore.setAgents([data])
-  agentStore.addAgent(data)
-  skillStore.setSkills(data.abilities)
-  showSkillInfo(skillStore.skill?.[0])
+  try {
+    const response = await fetch('https://valorant-api.com/v1/agents/' + agentsClass)
+    const { data } = await response.json()
+    agentStore.setAgents([data])
+    agentStore.addAgent(data)
+    skillStore.setSkills(data.abilities)
+    showSkillInfo(skillStore.skill?.[0])
+  } catch (error) {
+    console.error('WARNING:', error)
+  }
 }
 
 watch(
@@ -33,21 +40,21 @@ watch(
 
 <template>
   <section>
-    <div class="main-container" v-if="agentStore.agents[0]">
+    <div class="main-container" v-if="agent">
       <div class="description">
         <div class="left-up-block">
           <div class="name-img-agent">
-            <h1 class="name-agent">{{ agentStore.agents[0]?.displayName }}</h1>
+            <h1 class="name-agent">{{ agent?.displayName }}</h1>
             <Popper>
-              <img class="img-role" v-lazy="agentStore.agents[0]?.role.displayIcon" alt="" />
+              <img class="img-role" v-lazy="agent?.role.displayIcon" alt="" />
               <template #content>
-                <div class="tooltip">{{ agentStore.agents[0]?.role.description }}</div>
+                <div class="tooltip">{{ agent?.role.description }}</div>
               </template>
             </Popper>
           </div>
-          <div class="description-agent">{{ agentStore.agents[0]?.description }}</div>
+          <div class="description-agent">{{ agent?.description }}</div>
         </div>
-        <img class="img-agent" v-lazy="agentStore.agents[0]?.fullPortrait" alt="" />
+        <img class="img-agent" v-lazy="agent?.fullPortrait" alt="" />
       </div>
       <nav v-if="skillStore.skill" class="navigation-panel-skills">
         <div class="main-navigation" v-for="(abi, index) in skillStore.skill" :key="index">

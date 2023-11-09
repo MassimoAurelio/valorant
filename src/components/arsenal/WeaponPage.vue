@@ -10,14 +10,18 @@ const route = useRoute()
 const weaponStore = useWeaponStore()
 
 const fetchGuns = async () => {
-  let weaponClass = `EEquippableCategory::${
-    (route.params.weaponClass as string).charAt(0).toUpperCase() +
-    (route.params.weaponClass as string).slice(1)
-  }`
+  try {
+    let weaponClass = `EEquippableCategory::${
+      (route.params.weaponClass as string).charAt(0).toUpperCase() +
+      (route.params.weaponClass as string).slice(1)
+    }`
 
-  const response = await fetch('https://valorant-api.com/v1/weapons/')
-  const { data } = await response.json()
-  weaponStore.weapon = data.filter((gun: Guns) => gun.category === weaponClass)
+    const response = await fetch('https://valorant-api.com/v1/weapons/')
+    const { data } = await response.json()
+    weaponStore.weapon = data.filter((gun: Guns) => gun.category === weaponClass)
+  } catch (error) {
+    console.error('WARNING:', error)
+  }
 }
 
 watchEffect(() => {
