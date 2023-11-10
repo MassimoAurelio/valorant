@@ -3,17 +3,12 @@ import { ref, onMounted, computed } from 'vue'
 import { useMapsStore } from '../../stores/counter'
 
 const mapsStore = useMapsStore()
-const currentMapIndex = ref<number>(0)
 
-const fetchAgent = async () => {
-  try {
-    const response = await fetch('https://valorant-api.com/v1/maps')
-    const { data } = await response.json()
-    mapsStore.setMaps(data)
-  } catch (error) {
-    console.error('WARNING:', error)
-  }
-}
+onMounted(() => {
+  mapsStore.fetchMaps()
+})
+
+const currentMapIndex = ref<number>(0)
 
 const nextMap = () => {
   if (currentMapIndex.value < mapsStore.map.length - 1) {
@@ -27,23 +22,20 @@ const prevMap = () => {
   }
 }
 
-const isFirstMap = computed(() => {
-  return currentMapIndex.value === 0 ? 'visibility: hidden' : ''
-})
-
-const isLastMap = computed(() => {
-  return currentMapIndex.value === mapsStore.map.length - 1 ? 'visibility: hidden' : ''
-})
-
-onMounted(async () => {
-  await fetchAgent()
-})
+const isFirstMap = computed(() => currentMapIndex.value === 0)
+const isLastMap = computed(() => currentMapIndex.value === mapsStore.map.length - 1)
 </script>
 
 <template>
   <div class="image-container">
     <h2 class="title"><span>MAPS</span></h2>
-    <div class="main-container">
+    <div v-if="mapsStore.loading">
+      <span>Loading maps data...</span>
+    </div>
+    <div v-if="mapsStore.error">
+      <span>Oops, something went wrong...</span>
+    </div>
+    <div class="main-container" v-else-if="!mapsStore.loading">
       <div class="image-wrapper">
         <img
           v-if="mapsStore.map.length"
@@ -56,8 +48,8 @@ onMounted(async () => {
         <div class="description">
           {{ mapsStore.map[currentMapIndex]?.narrativeDescription }}
         </div>
-        <button class="next-button" @click="nextMap" :style="isLastMap">Forward</button>
-        <button class="back-button" @click="prevMap" :style="isFirstMap">Back</button>
+        <button class="next-button" @click="nextMap" v-if="!isLastMap">Forward</button>
+        <button class="back-button" @click="prevMap" v-if="!isFirstMap">Back</button>
       </div>
     </div>
   </div>

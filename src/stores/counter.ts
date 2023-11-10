@@ -35,12 +35,28 @@ export const useSkillStore = defineStore({
   }
 })
 
+
 export const useMapsStore = defineStore({
   id: 'map',
   state: () => ({
-    map: [] as Map[]
+    map: [] as Map[],
+    loading: false,
+    error: null
   }),
   actions: {
+    async fetchMaps() {
+      this.loading = true
+      this.error = null
+      try {
+        const response = await fetch('https://valorant-api.com/v1/maps')
+        const { data } = await response.json()
+        this.setMaps(data)
+      } catch (error) {
+        this.error = error
+      } finally {
+        this.loading = false
+      }
+    },
     setMaps(map: Map[]) {
       this.map = map
     },
@@ -116,6 +132,22 @@ export const useWeaponStore = defineStore({
     },
     getSkins(skin: Skins) {
       this.skin.push(skin)
+    }
+  }
+})
+
+export const useNavigationStore = defineStore('navigation', {
+  state: () => ({
+    links: [
+      { title: 'AGENTS', destination: '/agents/' },
+      { title: 'MAPS', destination: '/maps' },
+      { title: 'ARSENAL', destination: '/guns' },
+      { title: 'BUNDLE', destination: '/bundle' }
+    ]
+  }),
+  actions: {
+    addLink(newLink: any) {
+      this.links.push(newLink)
     }
   }
 })

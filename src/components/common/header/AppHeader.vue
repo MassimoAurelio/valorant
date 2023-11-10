@@ -2,6 +2,9 @@
 import DropdownMenuItem from '../DropDownMenuItem.vue'
 import LeftHeaderContent from './LeftHeaderContent.vue'
 import RightContent from './RightHeaderContent.vue'
+import { useNavigationStore } from '..//..//../stores/counter'
+
+const store = useNavigationStore()
 </script>
 
 <template>
@@ -14,19 +17,14 @@ import RightContent from './RightHeaderContent.vue'
             <p>GAME INFO</p>
           </div>
           <template #menu>
-            <router-link to="/agents/" class="agents">
-              <div class="router-link-content">AGENTS</div>
+            <router-link
+              v-for="link in store.links"
+              :key="link.title"
+              :to="link.destination"
+              class="link"
+            >
+              <div class="router-link-content">{{ link.title }}</div>
             </router-link>
-
-            <router-link to="/maps" class="maps">
-              <div class="router-link-content">MAPS</div></router-link
-            >
-            <router-link to="/guns" class="arsenal">
-              <div class="router-link-content">ARSENAL</div></router-link
-            >
-            <router-link to="/bundle" class="arsenal">
-              <div class="router-link-content">BUNDLE</div></router-link
-            >
           </template>
         </DropdownMenuItem>
         <div class="desktop-link-item">

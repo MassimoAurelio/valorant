@@ -67,8 +67,9 @@ onMounted(() => {
           type="button"
           data-interaction-id="valorant-home-hero-download"
           data-testid="hero:button-download"
+          @click="togglePopup"
         >
-          <div class="div-button" @click="togglePopup">
+          <div class="div-button">
             <span class="qwe"></span><span class="span-igrat">PLAY FREE</span>
           </div>
         </button>
