@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import type { Agent } from '..//..//..//types/interfaces'
+import type { Agent } from '..//..//./typings/interfaces'
 import { useRouter } from 'vue-router'
-import { useAgentStore, useSkillStore } from '..//..//..//stores/counter'
+import { useAgentStore } from '..//..//core/stores/counter'
 
 const router = useRouter()
 const agentStore = useAgentStore()
