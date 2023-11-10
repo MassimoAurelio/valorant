@@ -5,13 +5,12 @@ import type { Guns } from '..//..//typings/interfaces'
 import { useWeaponStore } from '..//..//core/stores/counter'
 import dropDownMenu from './DropDownMenu.vue'
 
-const spanTextWeapon = 'All WEAPONS'
-const spanTextSkin = 'All SKINS'
-const routerGuns = '/guns/'
-const routerSkin = '/skins/'
-
 const route = useRoute()
 const weaponStore = useWeaponStore()
+let spanTextWeapon = weaponStore.spanTextWeapon
+let spanTextSkin = weaponStore.spanTextSkin
+let routerGuns = weaponStore.routerGuns
+let routerSkin = weaponStore.routerSkin
 
 const fetchGuns = async () => {
   try {

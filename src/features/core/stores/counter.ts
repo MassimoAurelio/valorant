@@ -35,7 +35,6 @@ export const useSkillStore = defineStore({
   }
 })
 
-
 export const useMapsStore = defineStore({
   id: 'map',
   state: () => ({
@@ -118,7 +117,11 @@ export const useWeaponStore = defineStore({
       'Spectre',
       'Stinger',
       'Melee'
-    ] as string[]
+    ] as string[],
+    spanTextWeapon: 'All WEAPONS',
+    spanTextSkin: 'All SKINS',
+    routerGuns: '/guns/',
+    routerSkin: '/skins/'
   }),
   actions: {
     setWeapon(weapon: Guns[]) {

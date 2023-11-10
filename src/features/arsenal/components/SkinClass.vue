@@ -1,39 +1,38 @@
 <script setup lang="ts">
-import { watch } from 'vue'
-import { useRoute } from 'vue-router'
-import type { Skins } from '..//..//typings/interfaces'
-import { useWeaponStore } from '..//..//core/stores/counter'
-import dropDownMenu from './DropDownMenu.vue'
+import { watch } from "vue";
+import { useRoute } from "vue-router";
+import type { Skins } from "..//..//typings/interfaces";
+import { useWeaponStore } from "..//..//core/stores/counter";
+import dropDownMenu from "./DropDownMenu.vue";
 
-let route = useRoute()
-const weaponStore = useWeaponStore()
+let route = useRoute();
+const weaponStore = useWeaponStore();
 
-const spanTextWeapon = 'All WEAPONS'
-const spanTextSkin = 'All SKINS'
-const routerGuns = '/guns/'
-
-const routerSkin = '/skins/'
+let spanTextWeapon = weaponStore.spanTextWeapon;
+let spanTextSkin = weaponStore.spanTextSkin;
+let routerGuns = weaponStore.routerGuns;
+let routerSkin = weaponStore.routerSkin;
 
 const fetchSkins = async () => {
   try {
-    const response = await fetch('https://valorant-api.com/v1/weapons/skins')
-    const { data } = await response.json()
+    const response = await fetch("https://valorant-api.com/v1/weapons/skins");
+    const { data } = await response.json();
     const filteredSkins = data.filter((skin: Skins) =>
       skin.displayName.includes(route.params.skinClass)
-    )
-    weaponStore.setSkins(filteredSkins)
+    );
+    weaponStore.setSkins(filteredSkins);
   } catch (error) {
-    console.error('WARNING:', error)
+    console.error("WARNING:", error);
   }
-}
+};
 
 watch(
   () => route.params.skinClass,
   () => {
-    fetchSkins()
+    fetchSkins();
   },
   { immediate: true }
-)
+);
 </script>
 
 <template>
@@ -134,7 +133,7 @@ watch(
   font-size: 2rem;
   font-weight: 800;
   color: #0f1923;
-  font-family: 'Tungsten-Bold', arial, georgia, sans-serif;
+  font-family: "Tungsten-Bold", arial, georgia, sans-serif;
   margin-bottom: 20px;
 }
 
@@ -145,7 +144,7 @@ watch(
   font-size: 2rem;
   font-weight: 800;
   color: #0f1923;
-  font-family: 'Tungsten-Bold', arial, georgia, sans-serif;
+  font-family: "Tungsten-Bold", arial, georgia, sans-serif;
 }
 
 .skin-dropdown {
