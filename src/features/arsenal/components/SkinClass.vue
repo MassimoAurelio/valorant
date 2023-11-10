@@ -1,36 +1,39 @@
 <script setup lang="ts">
-import { watchEffect } from 'vue'
+import { watch } from 'vue'
 import { useRoute } from 'vue-router'
-import type { Guns } from '..//../types/interfaces'
-import { useWeaponStore } from '..//..//stores/counter'
-import dropDownMenu from '..//..//components/arsenal/DropDownMenu.vue'
+import type { Skins } from '..//..//typings/interfaces'
+import { useWeaponStore } from '..//..//core/stores/counter'
+import dropDownMenu from './DropDownMenu.vue'
+
+let route = useRoute()
+const weaponStore = useWeaponStore()
 
 const spanTextWeapon = 'All WEAPONS'
 const spanTextSkin = 'All SKINS'
 const routerGuns = '/guns/'
+
 const routerSkin = '/skins/'
 
-const route = useRoute()
-const weaponStore = useWeaponStore()
-
-const fetchGuns = async () => {
+const fetchSkins = async () => {
   try {
-    let weaponClass = `EEquippableCategory::${
-      (route.params.weaponClass as string).charAt(0).toUpperCase() +
-      (route.params.weaponClass as string).slice(1)
-    }`
-
-    const response = await fetch('https://valorant-api.com/v1/weapons/')
+    const response = await fetch('https://valorant-api.com/v1/weapons/skins')
     const { data } = await response.json()
-    weaponStore.weapon = data.filter((gun: Guns) => gun.category === weaponClass)
+    const filteredSkins = data.filter((skin: Skins) =>
+      skin.displayName.includes(route.params.skinClass)
+    )
+    weaponStore.setSkins(filteredSkins)
   } catch (error) {
     console.error('WARNING:', error)
   }
 }
 
-watchEffect(() => {
-  fetchGuns()
-})
+watch(
+  () => route.params.skinClass,
+  () => {
+    fetchSkins()
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
@@ -56,11 +59,10 @@ watchEffect(() => {
         </div>
       </div>
       <div class="weaponList">
-        <div class="weaponBlock" v-for="weapon in weaponStore.weapon" :key="weapon.uuid">
+        <div class="weaponBlock" v-for="skin in weaponStore.skin" :key="skin.uuid">
           <div class="weaponBlockValue">
-            <div class="weaponName">{{ weapon?.displayName }}</div>
-            <img class="weaponImg" v-lazy="weapon?.displayIcon" alt="" />
-            <p class="weaponSummaryCard">{{ weapon?.categoryText }}</p>
+            <div class="weaponName">{{ skin?.displayName }}</div>
+            <img class="weaponImg" v-lazy="skin?.displayIcon" alt="" />
           </div>
         </div>
       </div>
@@ -109,6 +111,8 @@ watchEffect(() => {
   flex-direction: column;
   justify-content: center;
   width: 600px;
+  min-height: 500px;
+  max-height: 400px;
   margin-bottom: 30px;
   text-transform: uppercase;
   border: 2px solid #000;
@@ -148,3 +152,4 @@ watchEffect(() => {
   margin-left: 50px;
 }
 </style>
+../../features/core/stores/counter../../features/typings/interfaces

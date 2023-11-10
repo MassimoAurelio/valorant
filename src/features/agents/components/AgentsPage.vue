@@ -2,7 +2,7 @@
 import { watch, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Popper from 'vue3-popper'
-import { useAgentStore, useSkillStore } from '../../stores/counter'
+import { useAgentStore, useSkillStore } from '..//..//..//stores/counter'
 
 const route = useRoute()
 const agentsClass = route.params.agentsClass
@@ -182,3 +182,4 @@ watch(
   border-color: black;
 }
 </style>
+../../core/stores/counter

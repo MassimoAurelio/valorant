@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import type { Agent } from '../../types/interfaces'
+import type { Agent } from '..//..//..//types/interfaces'
 import { useRouter } from 'vue-router'
-import { useAgentStore } from '../../stores/counter'
+import { useAgentStore, useSkillStore } from '..//..//..//stores/counter'
 
 const router = useRouter()
 const agentStore = useAgentStore()
@@ -97,3 +97,4 @@ onMounted(fetchAgent)
   background-color: #d65863;
 }
 </style>
+../../core/stores/counter../../typings/interfaces

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineEmits } from 'vue'
-import { usePopupStore } from '../../../stores/counter'
+import { usePopupStore } from '..//..//..//core/stores/counter'
 
 const popupStore = usePopupStore()
 
@@ -215,3 +215,4 @@ const closePopup = () => {
   align-items: center;
 }
 </style>
+../../../features/core/stores/counter

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { usePopupStore } from '..//..//stores/counter'
+import { usePopupStore } from '..//..//core/stores/counter'
 
 const videoRef = ref<HTMLVideoElement | null>(null)
 const sourceRef = ref<HTMLSourceElement | null>(null)
@@ -140,3 +140,4 @@ onMounted(() => {
   border: 0.5px solid #ff4655;
 }
 </style>
+../../features/core/stores/counter

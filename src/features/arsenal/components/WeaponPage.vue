@@ -1,26 +1,34 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useWeaponStore } from '../../stores/counter'
-import dropDownMenu from '..//..//components/arsenal/DropDownMenu.vue'
+import { watchEffect } from 'vue'
+import { useRoute } from 'vue-router'
+import type { Guns } from '..//..//typings/interfaces'
+import { useWeaponStore } from '..//..//core/stores/counter'
+import dropDownMenu from './DropDownMenu.vue'
 
 const spanTextWeapon = 'All WEAPONS'
 const spanTextSkin = 'All SKINS'
 const routerGuns = '/guns/'
 const routerSkin = '/skins/'
 
+const route = useRoute()
 const weaponStore = useWeaponStore()
 
 const fetchGuns = async () => {
   try {
-    const response = await fetch('https://valorant-api.com/v1/weapons')
+    let weaponClass = `EEquippableCategory::${
+      (route.params.weaponClass as string).charAt(0).toUpperCase() +
+      (route.params.weaponClass as string).slice(1)
+    }`
+
+    const response = await fetch('https://valorant-api.com/v1/weapons/')
     const { data } = await response.json()
-    weaponStore.setWeapon(data)
+    weaponStore.weapon = data.filter((gun: Guns) => gun.category === weaponClass)
   } catch (error) {
     console.error('WARNING:', error)
   }
 }
 
-onMounted(async () => {
+watchEffect(() => {
   fetchGuns()
 })
 </script>
@@ -52,11 +60,7 @@ onMounted(async () => {
           <div class="weaponBlockValue">
             <div class="weaponName">{{ weapon?.displayName }}</div>
             <img class="weaponImg" v-lazy="weapon?.displayIcon" alt="" />
-            <p class="weaponSummaryCard">{{ weapon?.shopData?.category }}</p>
-            <p class="weaponSummaryCard">Fire range: {{ weapon?.weaponStats?.fireRate }}</p>
-            <p class="weaponSummaryCard">
-              First Bullet Accuracy: {{ weapon?.weaponStats?.firstBulletAccuracy }}
-            </p>
+            <p class="weaponSummaryCard">{{ weapon?.categoryText }}</p>
           </div>
         </div>
       </div>
@@ -144,3 +148,4 @@ onMounted(async () => {
   margin-left: 50px;
 }
 </style>
+../../features/core/stores/counter../../features/typings/interfaces

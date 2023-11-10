@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DropdownMenuItem from '../common/DropDownMenuItem.vue'
+import DropdownMenuItem from '..//..//common/header/components/DropDownMenuItem.vue'
 
 const props = defineProps({
   spanText: {

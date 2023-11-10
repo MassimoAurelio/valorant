@@ -4,42 +4,42 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../components/common/MainPage.vue')
+    component: () => import('..//..//mainpage/components/MainPage.vue')
   },
   {
     path: '/maps',
     name: 'Maps',
-    component: () => import('../components/maps/MapsApps.vue')
+    component: () => import('..//..//maps/components/MapsApps.vue')
   },
   {
     path: '/bundle',
     name: 'Bundle',
-    component: () => import('../components/bundle/BundlePage.vue')
+    component: () => import('..//..//bundle/components/BundlePage.vue')
   },
   {
     path: '/guns',
     name: 'Guns',
-    component: () => import('../components/arsenal/ValorantGuns.vue')
+    component: () => import('..//..//arsenal/components/ValorantGuns.vue')
   },
   {
     path: '/guns/:weaponClass',
     name: 'WeaponClass',
-    component: () => import('../components/arsenal/WeaponPage.vue')
+    component: () => import('..//..//arsenal/components/WeaponPage.vue')
   },
   {
     path: '/skins/:skinClass',
     name: 'SkinClass',
-    component: () => import('../components/arsenal/SkinClass.vue')
+    component: () => import('..//..//arsenal/components/SkinClass.vue')
   },
   {
     path: '/agents/',
     name: 'agents',
-    component: () => import('../components/agents/ValorantAgents.vue')
+    component: () => import('..//..//agents/components/ValorantAgents.vue')
   },
   {
     path: '/agents/:agentsClass',
     name: 'AgentPage',
-    component: () => import('../components/agents/AgentsPage.vue')
+    component: () => import('..//..//agents/components/AgentsPage.vue')
   }
 ]
 

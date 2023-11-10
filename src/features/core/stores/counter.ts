@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Agent, Umeniya, Map, Guns, Skins, Bundle } from '..//types/interfaces'
+import type { Agent, Umeniya, Map, Guns, Skins, Bundle } from '../../typings/interfaces'
 
 export const useAgentStore = defineStore({
   id: 'agent',

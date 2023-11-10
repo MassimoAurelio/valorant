@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { useMapsStore } from '../../stores/counter'
+import { useMapsStore } from '../../core/stores/counter'
 
 const mapsStore = useMapsStore()
 
@@ -131,3 +131,4 @@ img {
   border: 1px solid #ff4655;
 }
 </style>
+../../features/core/stores/counter

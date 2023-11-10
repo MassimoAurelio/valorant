@@ -2,7 +2,7 @@
 import SearchHeader from './SearchHeader.vue'
 import PopupComponent from './GamePopup.vue'
 
-import { usePopupStore } from '../../../stores/counter'
+import { usePopupStore } from '..//..//../core/stores/counter'
 
 const popupStore = usePopupStore()
 
@@ -33,7 +33,7 @@ const togglePopup = () => {
         <span class="button-game" @click="togglePopup">PLAY NOW</span>
       </div>
     </div>
-    
+
     <PopupComponent v-if="popupStore.showPopup" @update:showPopup="popupStore.showPopup = $event" />
   </div>
 </template>
@@ -80,3 +80,4 @@ const togglePopup = () => {
   margin-top: 2px;
 }
 </style>
+../../../features/core/stores/counter

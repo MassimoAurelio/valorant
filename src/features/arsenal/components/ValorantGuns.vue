@@ -1,21 +1,27 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useBundleStore } from '..//../stores/counter'
+import { useWeaponStore } from '..//..//core/stores/counter'
+import dropDownMenu from './DropDownMenu.vue'
 
-const bundleStore = useBundleStore()
+const spanTextWeapon = 'All WEAPONS'
+const spanTextSkin = 'All SKINS'
+const routerGuns = '/guns/'
+const routerSkin = '/skins/'
 
-const fetchButdle = async () => {
+const weaponStore = useWeaponStore()
+
+const fetchGuns = async () => {
   try {
-    const response = await fetch('https://valorant-api.com/v1/bundles')
+    const response = await fetch('https://valorant-api.com/v1/weapons')
     const { data } = await response.json()
-    bundleStore.bundle = data
+    weaponStore.setWeapon(data)
   } catch (error) {
     console.error('WARNING:', error)
   }
 }
 
-onMounted(() => {
-  fetchButdle()
+onMounted(async () => {
+  fetchGuns()
 })
 </script>
 
@@ -24,12 +30,33 @@ onMounted(() => {
     <div class="main-container">
       <div class="title">
         <span class="first-span">CHOOSE YOUR WEAPON</span>
+        <div class="drop-boxs">
+          <div class="arsenal-dropdown">
+            <dropDownMenu
+              :spanText="spanTextWeapon"
+              :types="weaponStore.weaponClass"
+              :linkRoute="routerGuns"
+            />
+          </div>
+          <div class="skin-dropdown">
+            <dropDownMenu
+              :spanText="spanTextSkin"
+              :types="weaponStore.skinsClass"
+              :linkRoute="routerSkin"
+            />
+          </div>
+        </div>
       </div>
       <div class="weaponList">
-        <div class="weaponBlock" v-for="weapon in bundleStore.bundle" :key="weapon.uuid">
+        <div class="weaponBlock" v-for="weapon in weaponStore.weapon" :key="weapon.uuid">
           <div class="weaponBlockValue">
             <div class="weaponName">{{ weapon?.displayName }}</div>
             <img class="weaponImg" v-lazy="weapon?.displayIcon" alt="" />
+            <p class="weaponSummaryCard">{{ weapon?.shopData?.category }}</p>
+            <p class="weaponSummaryCard">Fire range: {{ weapon?.weaponStats?.fireRate }}</p>
+            <p class="weaponSummaryCard">
+              First Bullet Accuracy: {{ weapon?.weaponStats?.firstBulletAccuracy }}
+            </p>
           </div>
         </div>
       </div>
@@ -62,6 +89,15 @@ onMounted(() => {
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
+}
+
+.drop-boxs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: 440px;
 }
 
 .weaponBlock {
@@ -103,4 +139,9 @@ onMounted(() => {
   color: #0f1923;
   font-family: 'Tungsten-Bold', arial, georgia, sans-serif;
 }
+
+.skin-dropdown {
+  margin-left: 50px;
+}
 </style>
+../../features/core/stores/counter

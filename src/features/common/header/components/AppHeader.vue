@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import DropdownMenuItem from '../DropDownMenuItem.vue'
+import DropdownMenuItem from './DropDownMenuItem.vue'
 import LeftHeaderContent from './LeftHeaderContent.vue'
 import RightContent from './RightHeaderContent.vue'
-import { useNavigationStore } from '..//..//../stores/counter'
+import { useNavigationStore } from '..//..//..//core/stores/counter'
 
 const store = useNavigationStore()
 </script>
@@ -135,3 +135,4 @@ p:hover {
   text-decoration: none;
 }
 </style>
+../../../features/core/stores/counter
