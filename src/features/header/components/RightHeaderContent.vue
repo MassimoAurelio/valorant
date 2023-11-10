@@ -2,7 +2,7 @@
 import SearchHeader from './SearchHeader.vue'
 import PopupComponent from './GamePopup.vue'
 
-import { usePopupStore } from '..//..//../core/stores/counter'
+import { usePopupStore } from '..//..//core/stores/counter'
 
 const popupStore = usePopupStore()
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineEmits } from 'vue'
-import { usePopupStore } from '..//..//..//core/stores/counter'
+import { usePopupStore } from '..//..//core/stores/counter'
 
 const popupStore = usePopupStore()
 

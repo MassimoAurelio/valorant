@@ -31,7 +31,7 @@ onMounted(() => {
   <div class="riotbar-search-container">
     <div class="container">
       <img
-        src="../../../assets/img/search.svg"
+        src="..//..//../features//assets/img/search.svg"
         alt="Поиск"
         @click="openSearch"
         class="search-img"
@@ -44,7 +44,7 @@ onMounted(() => {
         ref="searchInput"
       />
       <div v-show="expanded" class="close">
-        <img src="../../../assets/img/close.svg" alt="" @click="closeSearch" />
+        <img src="..//..//../features//assets/img/close.svg" alt="" @click="closeSearch" />
       </div>
     </div>
   </div>

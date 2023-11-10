@@ -2,7 +2,7 @@
 import DropdownMenuItem from './DropDownMenuItem.vue'
 import LeftHeaderContent from './LeftHeaderContent.vue'
 import RightContent from './RightHeaderContent.vue'
-import { useNavigationStore } from '..//..//..//core/stores/counter'
+import { useNavigationStore } from '..//..//core/stores/counter'
 
 const store = useNavigationStore()
 </script>
