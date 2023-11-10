@@ -1,8 +1,21 @@
 <script setup lang="ts">
 import DropdownMenuItem from '../common/DropDownMenuItem.vue'
-import { useWeaponStore } from '..//.//../stores/counter'
 
-const weaponStore = useWeaponStore()
+const props = defineProps({
+  spanText: {
+    type: String,
+    required: true
+  },
+  types: {
+    type: Array as () => string[],
+    required: true
+  },
+  linkRoute: {
+    type: String,
+    required: true
+  }
+})
+
 
 </script>
 
@@ -10,20 +23,15 @@ const weaponStore = useWeaponStore()
   <div>
     <DropdownMenuItem>
       <div class="Dropdown">
-        <span class="second-span">All WEAPONS</span>
+        <span class="second-span">{{ spanText }}</span>
         <div class="drop-down-icon"></div>
       </div>
       <template #menu>
-        <router-link to="/guns/" class="arsenal">
+        <router-link to="/guns/" class="arsenal" v-if="spanText === 'All WEAPONS'">
           <div class="router-link-content">ALL WEAPONS</div>
         </router-link>
-        <router-link
-          v-for="weap in weaponStore.weaponClass"
-          :key="weap"
-          :to="'/guns/' + weap"
-          class="arsenal"
-        >
-          <div class="router-link-content">{{ weap.toUpperCase() }}</div>
+        <router-link v-for="type in types" :key="type" :to="`${linkRoute}${type}`" class="arsenal">
+          <div class="router-link-content">{{ type.toUpperCase() }}</div>
         </router-link>
       </template>
     </DropdownMenuItem>

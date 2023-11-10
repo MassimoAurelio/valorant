@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import ArsenalDropDownMenu from './ArsenalDropDownMenu.vue'
-import SkinDropDownMenu from './SkinDropDownMenu.vue'
 import { useWeaponStore } from '../../stores/counter'
+import dropDownMenu from '..//..//components/arsenal/DropDownMenu.vue'
+
+const spanTextWeapon = 'All WEAPONS'
+const spanTextSkin = 'All SKINS'
+const routerGuns = '/guns/'
+const routerSkin = '/skins/'
 
 const weaponStore = useWeaponStore()
 
@@ -27,8 +31,20 @@ onMounted(async () => {
       <div class="title">
         <span class="first-span">CHOOSE YOUR WEAPON</span>
         <div class="drop-boxs">
-          <div class="arsenal-dropdown"><ArsenalDropDownMenu /></div>
-          <div class="skin-dropdown"><SkinDropDownMenu /></div>
+          <div class="arsenal-dropdown">
+            <dropDownMenu
+              :spanText="spanTextWeapon"
+              :types="weaponStore.weaponClass"
+              :linkRoute="routerGuns"
+            />
+          </div>
+          <div class="skin-dropdown">
+            <dropDownMenu
+              :spanText="spanTextSkin"
+              :types="weaponStore.skinsClass"
+              :linkRoute="routerSkin"
+            />
+          </div>
         </div>
       </div>
       <div class="weaponList">

@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
-import ArsenalDropDownMenu from '../arsenal/ArsenalDropDownMenu.vue'
-import SkinDropDownMenu from './SkinDropDownMenu.vue'
 import type { Guns } from '..//../types/interfaces'
 import { useWeaponStore } from '..//..//stores/counter'
+import dropDownMenu from '..//..//components/arsenal/DropDownMenu.vue'
+
+const spanTextWeapon = 'All WEAPONS'
+const spanTextSkin = 'All SKINS'
+const routerGuns = '/guns/'
+const routerSkin = '/skins/'
 
 const route = useRoute()
 const weaponStore = useWeaponStore()
@@ -35,8 +39,20 @@ watchEffect(() => {
       <div class="title">
         <span class="first-span">CHOOSE YOUR WEAPON</span>
         <div class="drop-boxs">
-          <div class="arsenal-dropdown"><ArsenalDropDownMenu /></div>
-          <div class="skin-dropdown"><SkinDropDownMenu /></div>
+          <div class="arsenal-dropdown">
+            <dropDownMenu
+              :spanText="spanTextWeapon"
+              :types="weaponStore.weaponClass"
+              :linkRoute="routerGuns"
+            />
+          </div>
+          <div class="skin-dropdown">
+            <dropDownMenu
+              :spanText="spanTextSkin"
+              :types="weaponStore.skinsClass"
+              :linkRoute="routerSkin"
+            />
+          </div>
         </div>
       </div>
       <div class="weaponList">
